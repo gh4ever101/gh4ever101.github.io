@@ -1,0 +1,586 @@
+body {
+    background-color: #f0f0f0;
+    color: #333;
+    font: 16px/1.5 "Helvetica Neue", Helvetica, sans-serif;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+h2 {
+    color: #008B8B;
+}
+
+footer {
+    text-align: right;
+}
+
+.name, .type {
+    display: block;
+    text-align: center;
+}
+
+ul.team, ol.dragelements, ol.monsties {
+    list-style: none;
+    text-align: center;
+}
+
+ul.team, ol.monsties {
+    border-width: 0.05em;
+    border-radius: 1em;
+    border-style: solid;
+}
+
+ul.team li {
+    display: inline-block !important;
+    border-width: 0.125em;
+    border-style: solid;
+    border-radius: 1.5em;
+    padding: 0.4375em 0.125em;
+    margin: 0.3125em
+}
+
+ol.monsties li {
+    display: inline-block !important;
+    padding: 0.4375em 0.125em;
+}
+
+ul.team li figure {
+    border-width: 0.125em;
+    border-style: solid;
+    border-radius: 3.5625em;
+    width: 6em;
+    margin: 0 auto;
+    position: relative;
+}
+
+ol.dragelements li {
+    display: inline-block !important;
+    padding: 0.4375em 0.125em;
+}
+
+.draggable {
+    background-image: url(elements.png);
+}
+
+.draggable.dragon {
+    width: 24px;
+    height: 24px;
+    background-position: -1px -1px;
+}
+
+.draggable.fire {
+    width: 24px;
+    height: 24px;
+    background-position: -27px -1px;
+}
+
+.draggable.ice {
+    width: 24px;
+    height: 24px;
+    background-position: -1px -27px;
+}
+
+.draggable.thunder {
+    width: 24px;
+    height: 24px;
+    background-position: -27px -27px;
+}
+
+.draggable.water {
+    width: 24px;
+    height: 24px;
+    background-position: -53px -1px;
+}
+
+.elements {
+    background-image: url(elements.png);
+    position: absolute;
+    left: 10px;
+    top: 50px;
+}
+
+.elements.nelement {
+    background-image: none;
+}
+
+.elements.dragon {
+    width: 24px;
+    height: 24px;
+    background-position: -1px -1px;
+}
+
+.elements.fire {
+    width: 24px;
+    height: 24px;
+    background-position: -27px -1px;
+}
+
+.elements.ice {
+    width: 24px;
+    height: 24px;
+    background-position: -1px -27px;
+}
+
+.elements.thunder {
+    width: 24px;
+    height: 24px;
+    background-position: -27px -27px;
+}
+
+.elements.water {
+    width: 24px;
+    height: 24px;
+    background-position: -53px -1px;
+}
+
+li.power {
+    --ds-color: rgba(234, 94, 57, 1);
+}
+
+li.speed {
+    --ds-color: rgba(59, 136, 236, 1);
+}
+
+li.technical {
+    --ds-color: rgba(139, 196, 67, 1);
+}
+
+.icons {
+    background-image: url(icons.png);
+    display: inline-block;
+    position: relative;
+}
+
+.icons:hover {
+    filter: drop-shadow(5px 0 5px var(--ds-color));
+}
+
+.icons.unknown_monster {
+    background-image: url(question_mark.png);
+    width: 72px;
+    height: 72px;
+    box-shadow: none;
+}
+
+.icons.aptonoth {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -1px;
+}
+
+.icons.velocidrome {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -1px;
+}
+
+.icons.arzuros {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -1px;
+}
+
+.icons.yian_kut-ku {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -1px;
+}
+
+.icons.blue_yian_kut-ku {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -1px;
+}
+
+.icons.popo {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -1px;
+}
+
+.icons.lagombi {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -1px;
+}
+
+.icons.bulldrome {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -1px;
+}
+
+.icons.zamtrios {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -75px;
+}
+
+.icons.khezu {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -75px;
+}
+
+.icons.red_khezu {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -75px;
+}
+
+.icons.apceros {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -75px;
+}
+
+.icons.gendrome {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -75px;
+}
+
+.icons.royal_ludroth {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -75px;
+}
+
+.icons.gypceros {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -75px;
+}
+
+.icons.nerscylla {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -75px;
+}
+
+.icons.shrouded_nerscylla {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -149px;
+}
+
+.icons.qurupeco {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -149px;
+}
+
+.icons.rathian {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -149px;
+}
+
+.icons.pink_rathian {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -149px;
+}
+
+.icons.barroth {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -149px;
+}
+
+.icons.cephadrome {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -149px;
+}
+
+.icons.diablos {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -149px;
+}
+
+.icons.black_diablos {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -149px;
+}
+
+.icons.tigrex {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -223px;
+}
+
+.icons.iodrome {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -223px;
+}
+
+.icons.basarios {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -223px;
+}
+
+.icons.gravios {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -223px;
+}
+
+.icons.uragaan {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -223px;
+}
+
+.icons.brute_tigrex {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -223px;
+}
+
+.icons.great_jaggi {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -223px;
+}
+
+.icons.kecha_wacha {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -223px;
+}
+
+.icons.purple_ludroth {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -297px;
+}
+
+.icons.yian_garuga {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -297px;
+}
+
+.icons.congalala {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -297px;
+}
+
+.icons.emerald_congalala {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -297px;
+}
+
+.icons.crimson_qurupeco {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -297px;
+}
+
+.icons.black_gravios {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -297px;
+}
+
+.icons.zinogre {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -297px;
+}
+
+.icons.ruby_basarios {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -297px;
+}
+
+.icons.nargacuga {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -371px;
+}
+
+.icons.green_nargacuga {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -371px;
+}
+
+.icons.rathalos {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -371px;
+}
+
+.icons.azure_rathalos {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -371px;
+}
+
+.icons.purple_gypceros {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -371px;
+}
+
+.icons.ash_kecha_wacha {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -371px;
+}
+
+.icons.lagiacrus {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -371px;
+}
+
+.icons.ivory_lagiacrus {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -371px;
+}
+
+.icons.deviljho {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -445px;
+}
+
+.icons.great_baggi {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -445px;
+}
+
+.icons.jade_barroth {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -445px;
+}
+
+.icons.barioth {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -445px;
+}
+
+.icons.sand_barioth {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -445px;
+}
+
+.icons.stygian_zinogre {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -445px;
+}
+
+.icons.brachydios {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -445px;
+}
+
+.icons.rajang {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -445px;
+}
+
+.icons.kirin {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -519px;
+}
+
+.icons.monoblos {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -519px;
+}
+
+.icons.seregios {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -519px;
+}
+
+.icons.gold_rathian {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -519px;
+}
+
+.icons.silver_rathalos {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -519px;
+}
+
+.icons.kushala_daora {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -519px;
+}
+
+.icons.teostra {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -519px;
+}
+
+.icons.great_poogie {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -519px;
+}
+
+.icons.white_monoblos {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -1px;
+}
+
+.icons.molten_tigrex {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -75px;
+}
+
+.icons.oroshi_kirin {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -149px;
+}
+
+.icons.kumashira {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -223px;
+}
+
+.icons.epona {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -297px;
+}
+
+.icons.kurenai_goukami {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -371px;
+}
