@@ -85,8 +85,6 @@ function teamSwap($target, dropped_index) {
 	$dropped_item.insertAfter($target);
 	hashes.splice(2*target_index, 0, dropped_hashes[0], dropped_hashes[1]);
     }
-    console.log(target_index);
-    console.log(hashes);
     window.location.hash = hashes.toString();
     $(".url")[0].value = window.location.href;
 }
@@ -167,8 +165,8 @@ function removeFromTeam($this) {
     $type.html("???");
     $li.attr("class", "empty");
     $li.attr("title", "Unknown");
-    $li.removeAttr(draggable);
-    $li.removeAttr(ondragstart);
+    $li.removeAttr("draggable");
+    $li.removeAttr("ondragstart");
     hashes[2*$li.index()] = "";
     hashes[2*$li.index()+1] = "";
     window.location.hash = hashes.toString();
@@ -193,7 +191,6 @@ $(document).ready(function() {
 	    if (i%2 == 0) {
 		addToTeam($target, $("div[title='"+original_hashes[i].replace(/_/g, ' ')+"']").parent());
 	    } else {
-		console.log($(".delement."+original_hashes[i]));
 		changeElement($target, $(".delement."+original_hashes[i]));
 	    }
 	}
