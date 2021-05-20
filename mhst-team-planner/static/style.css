@@ -4,16 +4,34 @@ body {
     font: 16px/1.5 "Helvetica Neue", Helvetica, sans-serif;
 }
 
+article {
+    width: 64em;
+    padding: 1.25em;
+    margin: 1em auto
+}
+
 h1 {
     color: #333;
+    font-size: 2em;
+    font-weight: bold;
     text-align: center;
 }
 
 h2 {
     color: #008B8B;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 0em;
+}
+
+h3 {
+    color: #333;
+    font-size: 1em;
+    margin-bottom: 0em;
 }
 
 footer {
+    margin-top: 1em;
     text-align: right;
 }
 
@@ -22,74 +40,106 @@ footer {
     text-align: center;
 }
 
-ul.team, ol.dragelements, ol.monsties {
+.name {
+    font-weight: bold;
+}
+
+.builder {
+    display: flex;
+    justify-content: center;
+}
+
+.teamlist, .elementlist1, .elementlist2, .monsties {
     list-style: none;
     text-align: center;
+    margin: 0em;
 }
 
-ul.team, ol.monsties {
-    border-width: 0.05em;
-    border-radius: 1em;
-    border-style: solid;
+.team, .picker {
+    box-shadow: 0 0 1px 1px #999;
 }
 
-ul.team li {
-    display: inline-block !important;
-    border-width: 0.125em;
-    border-style: solid;
-    border-radius: 1.5em;
+.teamlist li {
+    display: inline-block;
     padding: 0.4375em 0.125em;
     margin: 0.3125em
 }
 
-ol.monsties li {
-    display: inline-block !important;
+.monsties li {
+    display: inline-block;
     padding: 0.4375em 0.125em;
 }
 
-ul.team li figure {
-    border-width: 0.125em;
-    border-style: solid;
-    border-radius: 3.5625em;
+.teamlist li figure {
     width: 6em;
     margin: 0 auto;
     position: relative;
 }
 
-ol.dragelements li {
-    display: inline-block !important;
-    padding: 0.4375em 0.125em;
+.elementtext {
+    text-align: left;
+    margin-left: 1em;
 }
 
-.draggable {
+.elementlist1, .elementlist2 {
+    display: inline-block;
+    text-align: right;
+}
+
+.elementlist1 li {
+    padding: 0.3em 0em;
+}
+
+.elementlist2 li {
+    padding: 0.5em 0em;
+}
+
+.sharediv {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 1em;
+    margin-bottom: 0.5em;
+}
+
+.url {
+    width: 50em;
+    border: 0.0833em solid #dedede;
+    margin-left: 1em;
+}
+
+.hidden {
+    opacity: 0.2;
+}
+
+.delement {
     background-image: url(elements.png);
 }
 
-.draggable.dragon {
+.delement.dragon {
     width: 24px;
     height: 24px;
     background-position: -1px -1px;
 }
 
-.draggable.fire {
+.delement.fire {
     width: 24px;
     height: 24px;
     background-position: -27px -1px;
 }
 
-.draggable.ice {
+.delement.ice {
     width: 24px;
     height: 24px;
     background-position: -1px -27px;
 }
 
-.draggable.thunder {
+.delement.thunder {
     width: 24px;
     height: 24px;
     background-position: -27px -27px;
 }
 
-.draggable.water {
+.delement.water {
     width: 24px;
     height: 24px;
     background-position: -53px -1px;
@@ -146,6 +196,15 @@ li.speed {
 
 li.technical {
     --ds-color: rgba(139, 196, 67, 1);
+}
+
+.filterdiv {
+    display: flex;
+    justify-content: space-around;
+}
+
+.filterlabel {
+    font-weight: bold;
 }
 
 .icons {

@@ -2,99 +2,146 @@
 
 <html lang="en">
   <head>
-    <title>MH Stories Team Planner</title>
-    <meta name="description" content="A team planner tool for MH Stories games">
-    <meta charset="utf-8">
-    <link href="static/style.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <title>MH Stories Team Planner</title>
+      <meta name="description" content="A team planner tool for MH Stories games">
+      <meta charset="utf-8">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.min.css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/js/bootstrap-multiselect.js"></script>
+      <link href="static/style.css" rel="stylesheet">
   </head>
 
   <body>
       <article id="mhst1">
-	  <h1 title="MH Stories 1 Team Planner">MH Stories 1 Team Planner</h1>
-	  <section id="team">
-	      <h2>Your Team</h2>
-	      <ul class="team">
-		  <li class="empty">
-		      <figure class="tfig">
-			  <a class="icons unknown_monster"></a>
-			  <div class="elements nelement"></div>
-		      </figure>
-		      <div class="info">
-			  <span class="name">???</span>
-			  <span class="type">???</span>
-		      </div>
-		  </li>
-		  <li class="empty">
-		      <figure class="tfig">
-			  <a class="icons unknown_monster"></a>
-			  <div class="elements nelement"></div>
-		      </figure>
-		      <div class="info">
-			  <span class="name">???</span>
-			  <span class="type">???</span>
-		      </div>
-		  </li>
-		  <li class="empty">
-		      <figure class="tfig">
-			  <a class="icons unknown_monster"></a>
-			  <div class="elements nelement"></div>
-		      </figure>
-		      <div class="info">
-			  <span class="name">???</span>
-			  <span class="type">???</span>
-		      </div>
-		  </li>
-		  <li class="empty">
-		      <figure class="tfig">
-			  <a class="icons unknown_monster"></a>
-			  <div class="elements nelement"></div>
-		      </figure>
-		      <div class="info">
-			  <span class="name">???</span>
-			  <span class="type">???</span>
-		      </div>
-		  </li>
-		  <li class="empty">
-		      <figure class="tfig">
-			  <a class="icons unknown_monster"></a>
-			  <div class="elements nelement"></div>
-		      </figure>
-		      <div class="info">
-			  <span class="name">???</span>
-			  <span class="type">???</span>
-		      </div>
-		  </li>
-		  <li class="empty">
-		      <figure class="tfig">
-			  <a class="icons unknown_monster"></a>
-			  <div class="elements nelement"></div>
-		      </figure>
-		      <div class="info">
-			  <span class="name">???</span>
-			  <span class="type">???</span>
-		      </div>
-		  </li>
-	      </ul>
-	      <span>Drag elements to change the element of your monsties!</span>
-	      <ol class="dragelements">
-		  <li><div class="draggable dragon" draggable="true"></div></li>
-		  <li><div class="draggable fire" draggable="true"></div></li>
-		  <li><div class="draggable ice" draggable="true"></div></li>
-		  <li><div class="draggable thunder" draggable="true"></div></li>
-		  <li><div class="draggable water" draggable="true"></div></li>
-	      </ol>
+	  <h1 title="MH Stories Team Planner">MH Stories Team Planner</h1>
+	  <h2>Your Team</h2>
+	  <section class="team">
+	      <div class="builder">
+		  <ol class="teamlist">
+		      <li class="empty" ondrop="drop(event)" ondragenter="allowDrop(event)" ondragover="allowDrop(event)">
+			  <figure class="tfig">
+			      <a class="icons unknown_monster"></a>
+			      <div class="elements nelement"></div>
+			  </figure>
+			  <div class="info">
+			      <span class="name">???</span>
+			      <span class="type">???</span>
+			  </div>
+		      </li>
+		      <li class="empty" ondrop="drop(event)" ondragenter="allowDrop(event)" ondragover="allowDrop(event)">
+			  <figure class="tfig">
+			      <a class="icons unknown_monster"></a>
+			      <div class="elements nelement"></div>
+			  </figure>
+			  <div class="info">
+			      <span class="name">???</span>
+			      <span class="type">???</span>
+			  </div>
+		      </li>
+		      <li class="empty" ondrop="drop(event)" ondragenter="allowDrop(event)" ondragover="allowDrop(event)">
+			  <figure class="tfig">
+			      <a class="icons unknown_monster"></a>
+			      <div class="elements nelement"></div>
+			  </figure>
+			  <div class="info">
+			      <span class="name">???</span>
+			      <span class="type">???</span>
+			  </div>
+		      </li>
+		      <li class="empty" ondrop="drop(event)" ondragenter="allowDrop(event)" ondragover="allowDrop(event)">
+			  <figure class="tfig">
+			      <a class="icons unknown_monster"></a>
+			      <div class="elements nelement"></div>
+			  </figure>
+			  <div class="info">
+			      <span class="name">???</span>
+			      <span class="type">???</span>
+			  </div>
+		      </li>
+		      <li class="empty" ondrop="drop(event)" ondragenter="allowDrop(event)" ondragover="allowDrop(event)">
+			  <figure class="tfig">
+			      <a class="icons unknown_monster"></a>
+			      <div class="elements nelement"></div>
+			  </figure>
+			  <div class="info">
+			      <span class="name">???</span>
+			      <span class="type">???</span>
+			  </div>
+		      </li>
+		      <li class="empty" ondrop="drop(event)" ondragenter="allowDrop(event)" ondragover="allowDrop(event)">
+			  <figure class="tfig">
+			      <a class="icons unknown_monster"></a>
+			      <div class="elements nelement"></div>
+			  </figure>
+			  <div class="info">
+			      <span class="name">???</span>
+			      <span class="type">???</span>
+			  </div>
+		      </li>
+		  </ol>
+		  <ol class="elementlist1">
+		      <li><div class="delement dragon" draggable="true" ondragstart="drag(event, this)"></div></li>
+		      <li><div class="delement fire" draggable="true" ondragstart="drag(event, this)"></div></li>
+		      <li><div class="delement ice" draggable="true" ondragstart="drag(event, this)"></div></li>
+		  </ol>
+		  <ol class="elementlist2">
+		      <li><div class="delement thunder" draggable="true" ondragstart="drag(event, this)"></div></li>
+		      <li><div class="delement water" draggable="true" ondragstart="drag(event, this)"></div></li>
+		  </ol>
+	      </div>
+	      <p class="elementtext">Drag monsties to build your team, and drag elements to change their element!<br/>Click to remove a monstie.</p>
+	      <div class="sharediv">
+		  <span class="sharetext">Share your team!</span>
+		  <input class="url" type="text" readonly></input>
+	      </div>
 	  </section>
 	  <h2>Monsties</h2>
-	  <section id="picker">
+	  <section class="picker">
+	      <div class="filterdiv">
+		  <div>
+		      <label for="rarity" class="filterlabel">Rarity</label>
+		      <select class="filter" id="rarity" onchange="filterMonsties()" multiple>
+			  <option value="r1" selected>★1</option>
+			  <option value="r2" selected>★2</option>
+			  <option value="r3" selected>★3</option>
+			  <option value="r4" selected>★4</option>
+			  <option value="r5" selected>★5</option>
+			  <option value="r6" selected>★6</option>
+			  <option value="r7" selected>★7</option>
+			  <option value="r8" selected>★8</option>
+			  <option value="r9" selected>★9</option>
+		      </select>
+		  </div>
+		  <div>
+		      <label for="type" class="filterlabel">Type</label>
+		      <select class="filter" id="type" onchange="filterMonsties()" multiple>
+			  <option value="power" selected>Power</option>
+			  <option value="speed" selected>Speed</option>
+			  <option value="technical" selected>Technical</option>
+		      </select>
+		  </div>
+		  <div>
+		      <label for="element" class="filterlabel">Element</label>
+		      <select class="filter" id="element" onchange="filterMonsties()" multiple>
+			  <option value="nelement" selected>Nonelemental</option>
+			  <option value="dragon" selected>Dragon</option>
+			  <option value="fire" selected>Fire</option>
+			  <option value="ice" selected>Ice</option>
+			  <option value="thunder" selected>Thunder</option>
+			  <option value="water" selected>Water</option>
+		      </select>
+		  </div>
+	      </div>
 	      <ol class="monsties">
-		  <li class="r1 power nelement psearch"><a href="#!" class="icons aptonoth" title="Aptonoth"></a></li>
-		  <li class="r1 speed nelement jump"><a href="#!" class="icons velocidrome" title="Velocidrome"></a></li>
-		  <li class="r2 power nelement hdetect rbreaker"><a href="#!" class="icons arzuros" title="Arzuros"></a></li>
-		  <li class="r2 technical fire msearch rbreaker"><a href="#!" class="icons yian_kut-ku" title="Yian Kut-Ku"></a></li>
-		  <li class="r2 technical fire msearch rbreaker"><a href="#!" class="icons blue_yian_kut-ku" title="Blue Yian Kut-Ku"></a></li>
-		  <li class="r1 power nelement psearch"><a href="#!" class="icons popo" title="Popo"></a></li>
-		  <li class="r2 speed ice msearch rbreaker"><a href="#!" class="icons lagombi" title="Lagombi"></a></li>
+		  <li class="r1 power nelement psearch" draggable="true" ondragstart="drag(event, this)"><div class="icons aptonoth" title="Aptonoth"></div></li>
+		  <li class="r1 speed nelement jump" draggable="true" ondragstart="drag(event, this)"><div class="icons velocidrome" title="Velocidrome"></div></li>
+		  <li class="r2 power nelement hdetect rbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons arzuros" title="Arzuros"></div></li>
+		  <li class="r2 technical fire msearch rbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons yian_kut-ku" title="Yian Kut-Ku"></div></li>
+		  <li class="r2 technical fire msearch rbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons blue_yian_kut-ku" title="Blue Yian Kut-Ku"></div></li>
+		  <li class="r1 power nelement psearch" draggable="true" ondragstart="drag(event, this)"><div class="icons popo" title="Popo"></div></li>
+		  <li class="r2 speed ice msearch rbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons lagombi" title="Lagombi"></div></li>
 	      </ol>
 	  </section>
 	  <footer>
