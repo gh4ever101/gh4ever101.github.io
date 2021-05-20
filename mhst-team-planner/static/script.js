@@ -1,5 +1,16 @@
-function drag(e, dragged){
+var hashes = ["", "",
+	      "", "",
+	      "", "",
+	      "", "",
+	      "", "",
+	      "", ""]
+
+function drag(e, dragged) {
     e.dataTransfer.setData("text/html", dragged.outerHTML);
+}
+
+function dragTeam(e, dragged) {
+    e.dataTransfer.setData("text/plain", $(dragged).index());
 }
 
 function allowDrop(e) {
@@ -7,11 +18,17 @@ function allowDrop(e) {
 }
 
 function drop(e) {
-    var $dropped = $(e.dataTransfer.getData("text/html"));
-    if ($dropped.hasClass("delement")) {
-	changeElement($(e.currentTarget), $dropped)
+    e.preventDefault();
+    var $ct = $(e.currentTarget);
+    if (e.dataTransfer.types[0]==="text/html") {
+	var $dropped = $(e.dataTransfer.getData("text/html"));
+	if ($dropped.hasClass("delement")) {
+	    changeElement($ct, $dropped);
+	} else {
+	    addToTeam($ct, $dropped);
+	}
     } else {
-	addToTeam($(e.currentTarget), $dropped)
+	teamSwap($ct, parseInt(e.dataTransfer.getData("text/plain")));
     }
 }
 
@@ -37,13 +54,6 @@ function filterMonsties() {
     }
 }
 
-var hashes = ["", "",
-	      "", "",
-	      "", "",
-	      "", "",
-	      "", "",
-	      "", ""]
-
 function changeElement($target, $dropped) {
     if ($target.hasClass("empty")) {
 	return;
@@ -64,13 +74,30 @@ function changeElement($target, $dropped) {
     }
 }
 
+function teamSwap($target, dropped_index) {
+    var $dropped_item = $(".teamlist").children().eq(dropped_index);
+    var target_index = $target.index();
+    var dropped_hashes = hashes.splice(2*dropped_index, 2);
+    if (dropped_index > target_index) {
+	$dropped_item.insertBefore($target);
+	hashes.splice(2*target_index, 0, dropped_hashes[0], dropped_hashes[1]);
+    } else if (dropped_index < target_index) {
+	$dropped_item.insertAfter($target);
+	hashes.splice(2*target_index, 0, dropped_hashes[0], dropped_hashes[1]);
+    }
+    console.log(target_index);
+    console.log(hashes);
+    window.location.hash = hashes.toString();
+    $(".url")[0].value = window.location.href;
+}
+
 function addToTeam($target, $dropped) {
-    // toggle the emptiness of the target
+    // toggle the emptiness of the slot
     $target.attr("class", "");
 
     // get the various elements
     var metadata = $dropped.attr("class").split(' ');
-    var $icon =$dropped.children("div");
+    var $icon = $dropped.children("div");
     var $figure = $target.children("figure.tfig");
     var $monstie = $figure.children("a.icons");
     var $element = $figure.children("div.elements")
@@ -83,6 +110,9 @@ function addToTeam($target, $dropped) {
     $monstie.attr("href", "#!");
     $monstie.attr("onclick", "return removeFromTeam($(this));");
     $name.html($icon.attr("title"));
+    $target.attr("draggable", "true");
+    $target.attr("ondragstart", "dragTeam(event, this)");
+    $target.attr("title", $icon.attr("title"));
 
     // parse through the metadata
     var newElement = "";
@@ -136,6 +166,9 @@ function removeFromTeam($this) {
     $name.html("???");
     $type.html("???");
     $li.attr("class", "empty");
+    $li.attr("title", "Unknown");
+    $li.removeAttr(draggable);
+    $li.removeAttr(ondragstart);
     hashes[2*$li.index()] = "";
     hashes[2*$li.index()+1] = "";
     window.location.hash = hashes.toString();
@@ -150,7 +183,7 @@ $(document).ready(function() {
     $(".filter").multiselect();
 
     // load the team if there was a hash
-    if (window.location.hash !== "") {
+    if (window.location.hash !== "" && window.location.hash !== "#" && window.location.hash !== "#!") {
 	var original_hashes = window.location.hash.split('#')[1].split(',');
 	for (var i = 0; i < original_hashes.length; i++) {
 	    if (original_hashes[i] === "") {

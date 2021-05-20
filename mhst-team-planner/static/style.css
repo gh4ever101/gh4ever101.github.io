@@ -626,20 +626,26 @@ li.technical {
     background-position: -593px -149px;
 }
 
-.icons.kumashira {
+.icons.glavenus {
     width: 72px;
     height: 72px;
     background-position: -593px -223px;
 }
 
-.icons.epona {
+.icons.kumashira {
     width: 72px;
     height: 72px;
     background-position: -593px -297px;
 }
 
-.icons.kurenai_goukami {
+.icons.epona {
     width: 72px;
     height: 72px;
     background-position: -593px -371px;
+}
+
+.icons.kurenai_goukami {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -445px;
 }
