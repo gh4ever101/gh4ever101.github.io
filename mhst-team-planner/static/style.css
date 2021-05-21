@@ -186,6 +186,31 @@ footer {
     background-position: -53px -1px;
 }
 
+.type {
+    display: inline-block;
+}
+
+.type.power {
+    background-image: url(types.png);
+    width: 24px;
+    height: 24px;
+    background-position: -1px -1px;
+}
+
+.type.speed {
+    background-image: url(types.png);
+    width: 24px;
+    height: 24px;
+    background-position: -27px -1px;
+}
+
+.type.technical {
+    background-image: url(types.png);
+    width: 24px;
+    height: 24px;
+    background-position: -1px -27px;
+}
+
 li.power {
     --ds-color: rgba(234, 94, 57, 1);
 }
@@ -205,6 +230,10 @@ li.technical {
 
 .filterlabel {
     font-weight: bold;
+}
+
+.filter {
+    width: 25%;
 }
 
 .icons {

@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
   <head>
       <title>MH Stories Team Planner</title>
-      <meta name="description" content="A team planner tool for MH Stories games">
+      <meta name="description" content="A team planner tool for MH Stories">
       <meta charset="utf-8">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
 			  </figure>
 			  <div class="info">
 			      <span class="name">???</span>
-			      <span class="type">???</span>
+			      <div class="type">???</div>
 			  </div>
 		      </li>
 		      <li class="empty" ondrop="drop(event)" ondragenter="allowDrop(event)" ondragover="allowDrop(event)" title="Unknown">
@@ -38,7 +38,7 @@
 			  </figure>
 			  <div class="info">
 			      <span class="name">???</span>
-			      <span class="type">???</span>
+			      <div class="type">???</div>
 			  </div>
 		      </li>
 		      <li class="empty" ondrop="drop(event)" ondragenter="allowDrop(event)" ondragover="allowDrop(event)" title="Unknown">
@@ -48,7 +48,7 @@
 			  </figure>
 			  <div class="info">
 			      <span class="name">???</span>
-			      <span class="type">???</span>
+			      <div class="type">???</div>
 			  </div>
 		      </li>
 		      <li class="empty" ondrop="drop(event)" ondragenter="allowDrop(event)" ondragover="allowDrop(event)" title="Unknown">
@@ -58,7 +58,7 @@
 			  </figure>
 			  <div class="info">
 			      <span class="name">???</span>
-			      <span class="type">???</span>
+			      <div class="type">???</div>
 			  </div>
 		      </li>
 		      <li class="empty" ondrop="drop(event)" ondragenter="allowDrop(event)" ondragover="allowDrop(event)" title="Unknown">
@@ -68,7 +68,7 @@
 			  </figure>
 			  <div class="info">
 			      <span class="name">???</span>
-			      <span class="type">???</span>
+			      <div class="type">???</div>
 			  </div>
 		      </li>
 		      <li class="empty" ondrop="drop(event)" ondragenter="allowDrop(event)" ondragover="allowDrop(event)" title="Unknown">
@@ -78,7 +78,7 @@
 			  </figure>
 			  <div class="info">
 			      <span class="name">???</span>
-			      <span class="type">???</span>
+			      <div class="type">???</div>
 			  </div>
 		      </li>
 		  </ol>
@@ -135,74 +135,128 @@
 		      </select>
 		  </div>
 	      </div>
+	      <div class="filterdiv">
+		  <div>
+		      <label for="abilities" class="filterlabel">Rider Abilities</label>
+		      <select class="filter" id="abilities" onchange="filterMonsties()" multiple>
+			  <option value="jump" selected>Jump</option>
+			  <option value="rbreaker" selected>Rock Breaker</option>
+			  <option value="swim" selected>Swim</option>
+			  <option value="iclimb" selected>Ivy Climb</option>
+			  <option value="gdive" selected>Ground Dive</option>
+			  <option value="ldive" selected>Lava Dive</option>
+			  <option value="fly" selected>Fly</option>
+			  <option value="mbreaker" selected>Mega Breaker</option>
+			  <option value="dash" selected>Dash</option>
+			  <option value="roar" selected>Roar</option>
+			  <option value="mcall" selected>Monster Call</option>
+			  <option value="stealth" selected>Stealth</option>
+			  <option value="psearch" selected>Plant Search</option>
+			  <option value="hsearch" selected>Honey Search</option>
+			  <option value="mosearch" selected>Monster Search</option>
+			  <option value="msearch" selected>Mushroom Search</option>
+			  <option value="fsearch" selected>Fish Search</option>
+			  <option value="nsearch" selected>Nest Search</option>
+			  <option value="bsearch" selected>Bug Search</option>
+			  <option value="obsearch" selected>Ore & Bone Search</option>
+		      </select>
+		  </div>
+		  <div>
+		      <label for="location" class="filterlabel">Location</label>
+		      <select class="filter" id="location" onchange="filterMonsties()" multiple data-mdb-clear-button="true">
+			  <option value="phills" selected>Pondry Hills (LR)</option>
+			  <option value="dsnow" selected>Darj Snowfields (LR)</option>
+			  <option value="ppass" selected>Perennial Pass (LR)</option>
+			  <option value="mplains" selected>Monsonne Plains (LR)</option>
+			  <option value="brain" selected>Babda Rainforest (LR)</option>
+			  <option value="tdesert" selected>Treste Desert (LR)</option>
+			  <option value="dvolc" selected>Dovan Volcano (LR)</option>
+			  <option value="pbeach" selected>Paupau Beach (LR)</option>
+			  <option value="hrphills" selected>Pondry Hills (HR)</option>
+			  <option value="hrmplains" selected>Monsonne Plains (HR)</option>
+			  <option value="hrbrain" selected>Babda Rainforest (HR)</option>
+			  <option value="hrtdesert" selected>Treste Desert (HR)</option>
+			  <option value="hrdvolc" selected>Dovan Volcano (HR)</option>
+			  <option value="hrpbeach" selected>Paupau Beach (HR)</option>
+			  <option value="hrmtcel" selected>Mt. Celion (HR)</option>
+			  <option value="poogies" selected>100 Poogies (HR)</option>
+			  <option value="toi" selected>Tower of Illusions (HR)</option>
+			  <option value="dlc" selected>DLC</option>
+		      </select>
+		  </div>
+	      </div>
 	      <ol class="monsties">
-		  <li class="r1 power nelement psearch" draggable="true" ondragstart="drag(event, this)"><div class="icons aptonoth" title="Aptonoth"></div></li>
-		  <li class="r1 speed nelement jump" draggable="true" ondragstart="drag(event, this)"><div class="icons velocidrome" title="Velocidrome"></div></li>
-		  <li class="r2 power nelement hdetect rbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons arzuros" title="Arzuros"></div></li>
-		  <li class="r2 technical fire msearch rbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons yian_kut-ku" title="Yian Kut-Ku"></div></li>
-		  <li class="r2 technical fire msearch rbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons blue_yian_kut-ku" title="Blue Yian Kut-Ku"></div></li>
-		  <li class="r1 power nelement psearch" draggable="true" ondragstart="drag(event, this)"><div class="icons popo" title="Popo"></div></li>
-		  <li class="r2 speed ice msearch rbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons lagombi" title="Lagombi"></div></li>
-		  <li class="r1 power nelement dash" draggable="true" ondragstart="drag(event, this)"><div class="icons bulldrome" title="Bulldrome"></div></li>
-		  <li class="r3 technical ice swim msearch" draggable="true" ondragstart="drag(event, this)"><div class="icons zamtrios" title="Zamtrios"></div></li>
-		  <li class="r3 technical thunder roar" draggable="true" ondragstart="drag(event, this)"><div class="icons khezu" title="Khezu"></div></li>
-		  <li class="r3 technical thunder roar" draggable="true" ondragstart="drag(event, this)"><div class="icons red_khezu" title="Red Khezu"></div></li>
-		  <li class="r2 power nelement psearch" draggable="true" ondragstart="drag(event, this)"><div class="icons apceros" title="Apceros"></div></li>
-		  <li class="r2 speed nelement jump" draggable="true" ondragstart="drag(event, this)"><div class="icons gendrome" title="Gendrome"></div></li>
-		  <li class="r3 power water swim fsearch" draggable="true" ondragstart="drag(event, this)"><div class="icons royal_ludroth" title="Royal Ludroth"></div></li>
-		  <li class="r3 technical nelement dash" draggable="true" ondragstart="drag(event, this)"><div class="icons gypceros" title="Gypceros"></div></li>
-		  <li class="r3 technical nelement msearch iclimb" draggable="true" ondragstart="drag(event, this)"><div class="icons nerscylla" title="Nerscylla"></div></li>
-		  <li class="r4 technical nelement msearch iclimb" draggable="true" ondragstart="drag(event, this)"><div class="icons shrouded_nerscylla" title="Shrouded Nerscylla"></div></li>
-		  <li class="r2 technical fire mcall" draggable="true" ondragstart="drag(event, this)"><div class="icons qurupeco" title="Qurupeco"></div></li>
-		  <li class="r3 speed fire nsearch" draggable="true" ondragstart="drag(event, this)"><div class="icons rathian" title="Rathian"></div></li>
-		  <li class="r4 speed fire nsearch" draggable="true" ondragstart="drag(event, this)"><div class="icons pink_rathian" title="Pink Rathian"></div></li>
-		  <li class="r3 speed water bsearch gdive" draggable="true" ondragstart="drag(event, this)"><div class="icons barroth" title="Barroth"></div></li>
-		  <li class="r2 power nelement msearch gdive" draggable="true" ondragstart="drag(event, this)"><div class="icons cephadrome" title="Cephadrome"></div></li>
-		  <li class="r4 power nelement roar gdive" draggable="true" ondragstart="drag(event, this)"><div class="icons diablos" title="Diablos"></div></li>
-		  <li class="r4 power nelement roar gdive" draggable="true" ondragstart="drag(event, this)"><div class="icons black_diablos" title="Black Diablos"></div></li>
-		  <li class="r4 power nelement dash iclimb" draggable="true" ondragstart="drag(event, this)"><div class="icons tigrex" title="Tigrex"></div></li>
-		  <li class="r2 speed nelement jump" draggable="true" ondragstart="drag(event, this)"><div class="icons iodrome" title="Iodrome"></div></li>
-		  <li class="r3 technical fire obsearch gdive" draggable="true" ondragstart="drag(event, this)"><div class="icons basarios" title="Basarios"></div></li>
-		  <li class="r4 power fire ldive roar" draggable="true" ondragstart="drag(event, this)"><div class="icons gravios" title="Gravios"></div></li>
-		  <li class="r4 power fire ldive obsearch" draggable="true" ondragstart="drag(event, this)"><div class="icons uragaan" title="Uragaan"></div></li>
-		  <li class="r5 power nelement dash iclimb" draggable="true" ondragstart="drag(event, this)"><div class="icons brute_tigrex" title="Brute Tigrex"></div></li>
-		  <li class="r2 speed nelement nsearch" draggable="true" ondragstart="drag(event, this)"><div class="icons great_jaggi" title="Great Jaggi"></div></li>
-		  <li class="r3 technical water bsearch iclimb" draggable="true" ondragstart="drag(event, this)"><div class="icons kecha_wacha" title="Kecha Wacha"></div></li>
-		  <li class="r4 power water swim fsearch" draggable="true" ondragstart="drag(event, this)"><div class="icons purple_ludroth" title="Purple Ludroth"></div></li>
-		  <li class="r5 technical nelement fly" draggable="true" ondragstart="drag(event, this)"><div class="icons yian_garuga" title="Yian Garuga"></div></li>
-		  <li class="r3 power nelement msearch iclimb" draggable="true" ondragstart="drag(event, this)"><div class="icons congalala" title="Congalala"></div></li>
-		  <li class="r4 power nelement msearch iclimb" draggable="true" ondragstart="drag(event, this)"><div class="icons emerald_congalala" title="Emerald Congalala"></div></li>
-		  <li class="r4 technical thunder mcall" draggable="true" ondragstart="drag(event, this)"><div class="icons crimson_qurupeco" title="Crimson Qurupeco"></div></li>
-		  <li class="r6 power fire ldive roar" draggable="true" ondragstart="drag(event, this)"><div class="icons black_gravios" title="Black Gravios"></div></li>
-		  <li class="r6 power thunder jump" draggable="true" ondragstart="drag(event, this)"><div class="icons zinogre" title="Zinogre"></div></li>
-		  <li class="r4 technical fire obsearch gdive" draggable="true" ondragstart="drag(event, this)"><div class="icons ruby_basarios" title="Ruby Basarios"></div></li>
-		  <li class="r5 speed nelement stealth" draggable="true" ondragstart="drag(event, this)"><div class="icons nargacuga" title="Nargacuga"></div></li>
-		  <li class="r6 speed nelement stealth" draggable="true" ondragstart="drag(event, this)"><div class="icons green_nargacuga" title="Green Nargacuga"></div></li>
-		  <li class="r5 power fire fly" draggable="true" ondragstart="drag(event, this)"><div class="icons rathalos" title="Rathalos"></div></li>
-		  <li class="r6 power fire fly" draggable="true" ondragstart="drag(event, this)"><div class="icons azure_rathalos" title="Azure Rathalos"></div></li>
-		  <li class="r4 technical nelement dash" draggable="true" ondragstart="drag(event, this)"><div class="icons purple_gypceros" title="Purple Gypceros"></div></li>
-		  <li class="r4 technical fire bsearch iclimb" draggable="true" ondragstart="drag(event, this)"><div class="icons ash_kecha_wacha" title="Ash Kecha Wacha"></div></li>
-		  <li class="r5 power thunder swim roar" draggable="true" ondragstart="drag(event, this)"><div class="icons lagiacrus" title="Lagiacrus"></div></li>
-		  <li class="r7 power thunder swim roar" draggable="true" ondragstart="drag(event, this)"><div class="icons ivory_lagiacrus" title="Ivory Lagiacrus"></div></li>
-		  <li class="r8 power dragon mosearch mbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons deviljho" title="Deviljho"></div></li>
-		  <li class="r2 speed nelement nsearch" draggable="true" ondragstart="drag(event, this)"><div class="icons great_baggi" title="Great Baggi"></div></li>
-		  <li class="r4 speed ice bsearch gdive" draggable="true" ondragstart="drag(event, this)"><div class="icons jade_barroth" title="Jade Barroth"></div></li>
-		  <li class="r5 speed ice fly rbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons barioth" title="Barioth"></div></li>
-		  <li class="r6 speed nelement fly rbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons sand_barioth" title="Sand Barioth"></div></li>
-		  <li class="r7 power dragon jump" draggable="true" ondragstart="drag(event, this)"><div class="icons stygian_zinogre" title="Stygian Zinogre"></div></li>
-		  <li class="r8 power fire roar mbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons brachydios" title="Brachydios"></div></li>
-		  <li class="r7 speed thunder jump" draggable="true" ondragstart="drag(event, this)"><div class="icons kirin" title="kirin"></div></li>
-		  <li class="r6 power nelement roar gdive" draggable="true" ondragstart="drag(event, this)"><div class="icons monoblos" title="monoblos"></div></li>
-		  <li class="r7 technical nelement fly" draggable="true" ondragstart="drag(event, this)"><div class="icons seregios" title="Seregios"></div></li>
-		  <li class="r9 speed fire nsearch" draggable="true" ondragstart="drag(event, this)"><div class="icons gold_rathian" title="Gold Rathian"></div></li>
-		  <li class="r9 power fire fly" draggable="true" ondragstart="drag(event, this)"><div class="icons silver_rathalos" title="Silver Rathalos"></div></li>
-		  <li class="r9 power nelement dash gdive" draggable="true" ondragstart="drag(event, this)"><div class="icons great_poogie" title="The Great Poogie"></div></li>
-		  <li class="r7 power nelement roar gdive" draggable="true" ondragstart="drag(event, this)"><div class="icons white_monoblos" title="White Monoblos"></div></li>
-		  <li class="r9 power nelement dash iclimb" draggable="true" ondragstart="drag(event, this)"><div class="icons molten_tigrex" title="Molten Tigrex"></div></li>
-		  <li class="r8 speed ice jump" draggable="true" ondragstart="drag(event, this)"><div class="icons oroshi_kirin" title="Oroshi Kirin"></div></li>
-		  <li class="r7 power fire mosearch mbreaker" draggable="true" ondragstart="drag(event, this)"><div class="icons glavenus" title="Glavenus"></div></li>
-		  <li class="r2 speed nelement jump" draggable="true" ondragstart="drag(event, this)"><div class="icons epona" title="Epona"></div></li>
-		  <li class="r5 power fire jump" draggable="true" ondragstart="drag(event, this)"><div class="icons kurenai_goukami" title="Kurenai Goukami"></div></li>
+		  <li class="r1 power nelement psearch phills" draggable="true" ondragstart="drag(event, this)"><div class="icons aptonoth" title="Aptonoth"></div></li>
+		  <li class="r1 speed nelement jump phills" draggable="true" ondragstart="drag(event, this)"><div class="icons velocidrome" title="Velocidrome"></div></li>
+		  <li class="r2 power nelement hdetect rbreaker phills" draggable="true" ondragstart="drag(event, this)"><div class="icons arzuros" title="Arzuros"></div></li>
+		  <li class="r2 technical fire mosearch rbreaker phills" draggable="true" ondragstart="drag(event, this)"><div class="icons yian_kut-ku" title="Yian Kut-Ku"></div></li>
+		  <li class="r2 technical fire mosearch rbreaker phills" draggable="true" ondragstart="drag(event, this)"><div class="icons blue_yian_kut-ku" title="Blue Yian Kut-Ku"></div></li>
+		  <li class="r1 power nelement psearch dsnow" draggable="true" ondragstart="drag(event, this)"><div class="icons popo" title="Popo"></div></li>
+		  <li class="r2 speed ice msearch rbreaker dsnow" draggable="true" ondragstart="drag(event, this)"><div class="icons lagombi" title="Lagombi"></div></li>
+		  <li class="r1 power nelement dash dsnow" draggable="true" ondragstart="drag(event, this)"><div class="icons bulldrome" title="Bulldrome"></div></li>
+		  <li class="r3 technical ice swim mosearch dsnow" draggable="true" ondragstart="drag(event, this)"><div class="icons zamtrios" title="Zamtrios"></div></li>
+		  <li class="r3 technical thunder roar dsnow" draggable="true" ondragstart="drag(event, this)"><div class="icons khezu" title="Khezu"></div></li>
+		  <li class="r3 technical thunder roar dsnow" draggable="true" ondragstart="drag(event, this)"><div class="icons red_khezu" title="Red Khezu"></div></li>
+		  <li class="r2 power nelement psearch mplains" draggable="true" ondragstart="drag(event, this)"><div class="icons apceros" title="Apceros"></div></li>
+		  <li class="r2 speed nelement jump mplains" draggable="true" ondragstart="drag(event, this)"><div class="icons gendrome" title="Gendrome"></div></li>
+		  <li class="r3 power water swim fsearch mplains" draggable="true" ondragstart="drag(event, this)"><div class="icons royal_ludroth" title="Royal Ludroth"></div></li>
+		  <li class="r3 technical nelement dash brain" draggable="true" ondragstart="drag(event, this)"><div class="icons gypceros" title="Gypceros"></div></li>
+		  <li class="r3 technical nelement mosearch iclimb brain" draggable="true" ondragstart="drag(event, this)"><div class="icons nerscylla" title="Nerscylla"></div></li>
+		  <li class="r4 technical nelement mosearch iclimb brain" draggable="true" ondragstart="drag(event, this)"><div class="icons shrouded_nerscylla" title="Shrouded Nerscylla"></div></li>
+		  <li class="r2 technical fire mcall mplains" draggable="true" ondragstart="drag(event, this)"><div class="icons qurupeco" title="Qurupeco"></div></li>
+		  <li class="r3 speed fire nsearch mplains" draggable="true" ondragstart="drag(event, this)"><div class="icons rathian" title="Rathian"></div></li>
+		  <li class="r4 speed fire nsearch ppass" draggable="true" ondragstart="drag(event, this)"><div class="icons pink_rathian" title="Pink Rathian"></div></li>
+		  <li class="r3 speed water bsearch gdive tdesert" draggable="true" ondragstart="drag(event, this)"><div class="icons barroth" title="Barroth"></div></li>
+		  <li class="r2 power nelement mosearch gdive tdesert" draggable="true" ondragstart="drag(event, this)"><div class="icons cephadrome" title="Cephadrome"></div></li>
+		  <li class="r4 power nelement roar gdive tdesert" draggable="true" ondragstart="drag(event, this)"><div class="icons diablos" title="Diablos"></div></li>
+		  <li class="r4 power nelement roar gdive tdesert" draggable="true" ondragstart="drag(event, this)"><div class="icons black_diablos" title="Black Diablos"></div></li>
+		  <li class="r4 power nelement dash iclimb dsnow" draggable="true" ondragstart="drag(event, this)"><div class="icons tigrex" title="Tigrex"></div></li>
+		  <li class="r2 speed nelement jump dvolc" draggable="true" ondragstart="drag(event, this)"><div class="icons iodrome" title="Iodrome"></div></li>
+		  <li class="r3 technical fire obsearch gdive dvolc" draggable="true" ondragstart="drag(event, this)"><div class="icons basarios" title="Basarios"></div></li>
+		  <li class="r4 power fire ldive roar dvolc" draggable="true" ondragstart="drag(event, this)"><div class="icons gravios" title="Gravios"></div></li>
+		  <li class="r4 power fire ldive obsearch dvolc" draggable="true" ondragstart="drag(event, this)"><div class="icons uragaan" title="Uragaan"></div></li>
+		  <li class="r5 power nelement dash iclimb dvolc" draggable="true" ondragstart="drag(event, this)"><div class="icons brute_tigrex" title="Brute Tigrex"></div></li>
+		  <li class="r2 speed nelement nsearch pbeach" draggable="true" ondragstart="drag(event, this)"><div class="icons great_jaggi" title="Great Jaggi"></div></li>
+		  <li class="r3 technical water bsearch iclimb pbeach" draggable="true" ondragstart="drag(event, this)"><div class="icons kecha_wacha" title="Kecha Wacha"></div></li>
+		  <li class="r4 power water swim fsearch pbeach" draggable="true" ondragstart="drag(event, this)"><div class="icons purple_ludroth" title="Purple Ludroth"></div></li>
+		  <li class="r5 technical nelement fly pbeach" draggable="true" ondragstart="drag(event, this)"><div class="icons yian_garuga" title="Yian Garuga"></div></li>
+		  <li class="r3 power nelement msearch iclimb hrbrain" draggable="true" ondragstart="drag(event, this)"><div class="icons congalala" title="Congalala"></div></li>
+		  <li class="r4 power nelement msearch iclimb hrbrain" draggable="true" ondragstart="drag(event, this)"><div class="icons emerald_congalala" title="Emerald Congalala"></div></li>
+		  <li class="r4 technical thunder mcall hrbrain" draggable="true" ondragstart="drag(event, this)"><div class="icons crimson_qurupeco" title="Crimson Qurupeco"></div></li>
+		  <li class="r6 power fire ldive roar hrbrain" draggable="true" ondragstart="drag(event, this)"><div class="icons black_gravios" title="Black Gravios"></div></li>
+		  <li class="r6 power thunder jump hrbrain" draggable="true" ondragstart="drag(event, this)"><div class="icons zinogre" title="Zinogre"></div></li>
+		  <li class="r4 technical fire obsearch gdive hrphills" draggable="true" ondragstart="drag(event, this)"><div class="icons ruby_basarios" title="Ruby Basarios"></div></li>
+		  <li class="r5 speed nelement stealth hrphills" draggable="true" ondragstart="drag(event, this)"><div class="icons nargacuga" title="Nargacuga"></div></li>
+		  <li class="r6 speed nelement stealth hrbrain" draggable="true" ondragstart="drag(event, this)"><div class="icons green_nargacuga" title="Green Nargacuga"></div></li>
+		  <li class="r5 power fire fly hrphills" draggable="true" ondragstart="drag(event, this)"><div class="icons rathalos" title="Rathalos"></div></li>
+		  <li class="r6 power fire fly hrphills" draggable="true" ondragstart="drag(event, this)"><div class="icons azure_rathalos" title="Azure Rathalos"></div></li>
+		  <li class="r4 technical nelement dash hrbrain" draggable="true" ondragstart="drag(event, this)"><div class="icons purple_gypceros" title="Purple Gypceros"></div></li>
+		  <li class="r4 technical fire bsearch iclimb hrpbeach" draggable="true" ondragstart="drag(event, this)"><div class="icons ash_kecha_wacha" title="Ash Kecha Wacha"></div></li>
+		  <li class="r5 power thunder swim roar hrpbeach" draggable="true" ondragstart="drag(event, this)"><div class="icons lagiacrus" title="Lagiacrus"></div></li>
+		  <li class="r7 power thunder swim roar hrpbeach" draggable="true" ondragstart="drag(event, this)"><div class="icons ivory_lagiacrus" title="Ivory Lagiacrus"></div></li>
+		  <li class="r8 power dragon mosearch mbreaker hrmtcel" draggable="true" ondragstart="drag(event, this)"><div class="icons deviljho" title="Deviljho"></div></li>
+		  <li class="r2 speed nelement nsearch hrmtcel" draggable="true" ondragstart="drag(event, this)"><div class="icons great_baggi" title="Great Baggi"></div></li>
+		  <li class="r4 speed ice bsearch gdive hrmtcel" draggable="true" ondragstart="drag(event, this)"><div class="icons jade_barroth" title="Jade Barroth"></div></li>
+		  <li class="r5 speed ice fly rbreaker hrmtcel" draggable="true" ondragstart="drag(event, this)"><div class="icons barioth" title="Barioth"></div></li>
+		  <li class="r6 speed nelement fly rbreaker hrtdesert" draggable="true" ondragstart="drag(event, this)"><div class="icons sand_barioth" title="Sand Barioth"></div></li>
+		  <li class="r7 power dragon jump hrmtcel" draggable="true" ondragstart="drag(event, this)"><div class="icons stygian_zinogre" title="Stygian Zinogre"></div></li>
+		  <li class="r8 power fire roar mbreaker hrmtcel" draggable="true" ondragstart="drag(event, this)"><div class="icons brachydios" title="Brachydios"></div></li>
+		  <li class="r8 power thunder nsearch mbreaker dlc" draggable="true" ondragstart="drag(event, this)"><div class="icons rajang" title="Rajang"></div></li>
+		  <li class="r7 speed thunder jump hrmplains" draggable="true" ondragstart="drag(event, this)"><div class="icons kirin" title="Kirin"></div></li>
+		  <li class="r6 power nelement roar gdive hrtdesert" draggable="true" ondragstart="drag(event, this)"><div class="icons monoblos" title="Monoblos"></div></li>
+		  <li class="r7 technical nelement fly hrphills" draggable="true" ondragstart="drag(event, this)"><div class="icons seregios" title="Seregios"></div></li>
+		  <li class="r9 speed fire nsearch toi" draggable="true" ondragstart="drag(event, this)"><div class="icons gold_rathian" title="Gold Rathian"></div></li>
+		  <li class="r9 power fire fly toi" draggable="true" ondragstart="drag(event, this)"><div class="icons silver_rathalos" title="Silver Rathalos"></div></li>
+		  <li class="r9 technical ice fly dlc" draggable="true" ondragstart="drag(event, this)"><div class="icons kushala_daora" title="Kushala Daora"></div></li>
+		  <li class="r9 power fire ldive dlc" draggable="true" ondragstart="drag(event, this)"><div class="icons teostra" title="Teostra"></div></li>
+		  <li class="r9 power nelement dash gdive poogies" draggable="true" ondragstart="drag(event, this)"><div class="icons great_poogie" title="The Great Poogie"></div></li>
+		  <li class="r7 power nelement roar gdive dlc" draggable="true" ondragstart="drag(event, this)"><div class="icons white_monoblos" title="White Monoblos"></div></li>
+		  <li class="r9 power nelement dash iclimb dlc" draggable="true" ondragstart="drag(event, this)"><div class="icons molten_tigrex" title="Molten Tigrex"></div></li>
+		  <li class="r8 speed ice jump dlc" draggable="true" ondragstart="drag(event, this)"><div class="icons oroshi_kirin" title="Oroshi Kirin"></div></li>
+		  <li class="r7 power fire mosearch mbreaker dlc" draggable="true" ondragstart="drag(event, this)"><div class="icons glavenus" title="Glavenus"></div></li>
+		  <li class="r3 power nelement hdetect rbreaker dlc" draggable="true" ondragstart="drag(event, this)"><div class="icons kumashira" title="Kumashira"></div></li>
+		  <li class="r2 speed nelement jump dlc" draggable="true" ondragstart="drag(event, this)"><div class="icons epona" title="Epona"></div></li>
+		  <li class="r5 power fire jump dlc" draggable="true" ondragstart="drag(event, this)"><div class="icons kurenai_goukami" title="Kurenai Goukami"></div></li>
 	      </ol>
 	  </section>
 	  <footer>

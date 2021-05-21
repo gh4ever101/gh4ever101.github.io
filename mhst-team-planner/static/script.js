@@ -77,16 +77,20 @@ function changeElement($target, $dropped) {
 function teamSwap($target, dropped_index) {
     var $dropped_item = $(".teamlist").children().eq(dropped_index);
     var target_index = $target.index();
-    var dropped_hashes = hashes.splice(2*dropped_index, 2);
-    if (dropped_index > target_index) {
-	$dropped_item.insertBefore($target);
-	hashes.splice(2*target_index, 0, dropped_hashes[0], dropped_hashes[1]);
-    } else if (dropped_index < target_index) {
-	$dropped_item.insertAfter($target);
-	hashes.splice(2*target_index, 0, dropped_hashes[0], dropped_hashes[1]);
+    if (dropped_index == target_index) {
+	return
+    } else {
+	var dropped_hashes = hashes.splice(2*dropped_index, 2);
+	if (dropped_index > target_index) {
+	    $dropped_item.insertBefore($target);
+	    hashes.splice(2*target_index, 0, dropped_hashes[0], dropped_hashes[1]);
+	} else if (dropped_index < target_index) {
+	    $dropped_item.insertAfter($target);
+	    hashes.splice(2*target_index, 0, dropped_hashes[0], dropped_hashes[1]);
+	}
+	window.location.hash = hashes.toString();
+	$(".url")[0].value = window.location.href;
     }
-    window.location.hash = hashes.toString();
-    $(".url")[0].value = window.location.href;
 }
 
 function addToTeam($target, $dropped) {
@@ -101,7 +105,7 @@ function addToTeam($target, $dropped) {
     var $element = $figure.children("div.elements")
     var $info = $target.children("div.info");
     var $name = $info.children("span.name");
-    var $type = $info.children("span.type");
+    var $type = $info.children("div.type");
 
     // set the attributes of the monstie
     $monstie.attr("class", $icon.attr("class"));
@@ -117,13 +121,19 @@ function addToTeam($target, $dropped) {
     for (var i = 0; i < metadata.length; i++) {
 	switch(metadata[i]) {
 	case "power":
-	    $type.html("Power");
+	    $type.html("");
+	    $type.attr("class", "type power");
+	    $type.attr("title", "Power");
 	    break;
 	case "speed":
-	    $type.html("Speed");
+	    $type.html("");
+	    $type.attr("class", "type speed");
+	    $type.attr("title", "Speed");
 	    break;
 	case "technical":
-	    $type.html("Technical");
+	    $type.html("");
+	    $type.attr("class", "type technical");
+	    $type.attr("title", "Technical");
 	    break;
 	case "nelement":
 	    $element.attr("class", "elements nelement");
@@ -154,7 +164,7 @@ function removeFromTeam($this) {
     var $li = $figure.parent();
     var $info = $li.children("div.info");
     var $name = $info.children("span.name");
-    var $type = $info.children("span.type");
+    var $type = $info.children("div.type");
 
     // clear the relevant attributes
     $this.attr("class", "icons unknown_monster");
@@ -162,6 +172,8 @@ function removeFromTeam($this) {
     $this.removeAttr("onclick");
     $element.attr("class", "elements nelement");
     $name.html("???");
+    $type.attr("class", "type");
+    $type.removeAttr("title");
     $type.html("???");
     $li.attr("class", "empty");
     $li.attr("title", "Unknown");
@@ -178,7 +190,11 @@ function removeFromTeam($this) {
 
 $(document).ready(function() {
     // load the filters
-    $(".filter").multiselect();
+    $(".filter").multiselect({
+	buttonWidth: "10em",
+	includeSelectAllOption: true,
+	numberDisplayed: 1
+    });
 
     // load the team if there was a hash
     if (window.location.hash !== "" && window.location.hash !== "#" && window.location.hash !== "#!") {
