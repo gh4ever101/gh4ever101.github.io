@@ -6,7 +6,7 @@ var hashes = ["", "",
 	      "", ""]
 
 function drag(e, dragged) {
-    e.dataTransfer.setData("text/html", dragged.outerHTML);
+    e.dataTransfer.setData("text/plain", dragged.outerHTML);
 }
 
 function dragTeam(e, dragged) {
@@ -20,15 +20,16 @@ function allowDrop(e) {
 function drop(e) {
     e.preventDefault();
     var $ct = $(e.currentTarget);
-    if (e.dataTransfer.types[0]==="text/html") {
-	var $dropped = $(e.dataTransfer.getData("text/html"));
+    var dropped = e.dataTransfer.getData("text/plain");
+    if (dropped.length > 1) {
+	var $dropped = $(dropped);
 	if ($dropped.hasClass("delement")) {
 	    changeElement($ct, $dropped);
 	} else {
 	    addToTeam($ct, $dropped);
 	}
     } else {
-	teamSwap($ct, parseInt(e.dataTransfer.getData("text/plain")));
+	teamSwap($ct, parseInt(dropped));
     }
 }
 
