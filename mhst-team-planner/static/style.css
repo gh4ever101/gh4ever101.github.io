@@ -3,6 +3,10 @@ body {
     font: 16px/1.5 "Helvetica Neue", Helvetica, sans-serif;
 }
 
+section {
+    background-color: #f0f0f0;
+}
+
 article {
     width: 70em;
     padding: 1.25em;
@@ -10,13 +14,14 @@ article {
 }
 
 h1 {
+    color: #6060a0;
     font-size: 2em;
     font-weight: bold;
     text-align: center;
 }
 
 h2 {
-    color: #00ACAC;
+    color: #00acac;
     font-weight: bold;
     font-size: 1.5em;
     margin-top: 1em;
