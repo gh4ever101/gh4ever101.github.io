@@ -4,7 +4,7 @@ body {
 }
 
 article {
-    width: 60em;
+    width: 70em;
     padding: 1.25em;
     margin: 1em auto
 }
@@ -38,9 +38,9 @@ div.type {
     font-size: 24px;
 }
 
-.exp {
-    margin-left: 1em;
-    font-size: 14px;
+p.exp {
+    text-align: right;
+    font-size: 12px;
 }
 
 .name, .type {
@@ -102,11 +102,22 @@ div.type {
     padding: 0.5em 0em;
 }
 
+.urldiv {
+    text-align: center;
+}
+
+.urldesc {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
 .url {
     resize: none;
     font-size: 12px;
     width: 80%;
     margin-left: 1em;
+    text-align: center;
     border: 0.0833em solid #dedede;
     scrollbar-width: none;
 }

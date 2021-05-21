@@ -19,7 +19,6 @@
 	  <h1 title="MH Stories Team Planner">MH Stories Team Planner</h1>
 	  <h2>Your Team</h2>
 	  <section class="team">
-	      <p class="exp">Drag monsties to build your team, and drag elements to change their element!<br/>Click to remove a monstie.</p>
 	      <div class="builder">
 		  <ol class="teamlist">
 		      <li class="empty" ondrop="drop(event)" ondragenter="allowDrop(event)" ondragover="allowDrop(event)" title="Unknown">
@@ -93,9 +92,12 @@
 		      <li><div class="delement water" draggable="true" ondragstart="drag(event, this)"></div></li>
 		  </ol>
 	      </div>
-	      <span class="exp">Share your team!</span>
-	      <textarea class="url" type="text" rows="1" spellcheck="false" wrap="off" readonly></textarea>
+	      <div class="urldiv">
+		  <span class="urldesc">Share your team!</br></span>
+		  <textarea class="url" type="text" rows="1" spellcheck="false" wrap="off" readonly></textarea>
+	      </div>
 	  </section>
+	  <p class="exp">Drag monsties to build your team, and drag elements to change their element! Click to remove a monstie.</p>
 	  <h2>Monsties</h2>
 	  <section class="picker">
 	      <div class="filterdiv">
