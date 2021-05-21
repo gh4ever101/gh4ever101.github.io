@@ -174,7 +174,7 @@ function removeFromTeam($this) {
     $name.html("???");
     $type.attr("class", "type");
     $type.removeAttr("title");
-    $type.html("???");
+    $type.html("&nbsp");
     $li.attr("class", "empty");
     $li.attr("title", "Unknown");
     $li.removeAttr("draggable");

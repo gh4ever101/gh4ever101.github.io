@@ -1,6 +1,5 @@
 body {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: #f7f7f7;
     font: 16px/1.5 "Helvetica Neue", Helvetica, sans-serif;
 }
 
@@ -11,28 +10,37 @@ article {
 }
 
 h1 {
-    color: #333;
     font-size: 2em;
     font-weight: bold;
     text-align: center;
 }
 
 h2 {
-    color: #008B8B;
+    color: #00ACAC;
     font-weight: bold;
     font-size: 1.5em;
+    margin-top: 1em;
     margin-bottom: 0em;
 }
 
 h3 {
-    color: #333;
     font-size: 1em;
     margin-bottom: 0em;
 }
 
 footer {
+    font-size: 10px;
     margin-top: 1em;
     text-align: right;
+}
+
+div.type {
+    font-size: 24px;
+}
+
+.exp {
+    margin-left: 1em;
+    font-size: 14px;
 }
 
 .name, .type {
@@ -94,17 +102,13 @@ footer {
     padding: 0.5em 0em;
 }
 
-.sharediv {
-    display: flex;
-    justify-content: flex-start;
-    margin-left: 1em;
-    margin-bottom: 0.5em;
-}
-
 .url {
-    width: 50em;
-    border: 0.0833em solid #dedede;
+    resize: none;
+    font-size: 12px;
+    width: 80%;
     margin-left: 1em;
+    border: 0.0833em solid #dedede;
+    scrollbar-width: none;
 }
 
 .hidden {
@@ -230,10 +234,6 @@ li.technical {
 
 .filterlabel {
     font-weight: bold;
-}
-
-.filter {
-    width: 25%;
 }
 
 .icons {
