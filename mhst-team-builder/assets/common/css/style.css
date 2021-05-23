@@ -1,0 +1,10 @@
+#monstieList li {
+    list-style-type: none;
+}
+
+#export-text-area {
+    width: 40%;
+    font-family: monospace;
+    font-size: 10px;
+    white-space: pre;
+}
