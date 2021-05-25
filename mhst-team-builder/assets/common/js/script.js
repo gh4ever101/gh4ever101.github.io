@@ -218,8 +218,8 @@ function filterMonsties(filter = true) {
 
     // prevent overscrolling of the highlighted monstie
     // underscrolling prevented on up arrow input
-    if (TeamBuilder.highlightedIndex > counter) {
-	TeamBuilder.highlightedIndex = counter;
+    if (TeamBuilder.highlightedIndex >= counter) {
+	TeamBuilder.highlightedIndex = counter - 1;
     }
 
     // set the highlighted monstie assuming one was found
@@ -293,8 +293,8 @@ function filterGenes(filter = true) {
 
     // prevent overscrolling of the highlighted gene
     // underscrolling prevented on up arrow input
-    if (TeamBuilder.highlightedIndex > counter) {
-	TeamBuilder.highlightedIndex = counter;
+    if (TeamBuilder.highlightedIndex >= counter) {
+	TeamBuilder.highlightedIndex = counter - 1;
     }
 
     // set the highlighted gene assuming one was found
