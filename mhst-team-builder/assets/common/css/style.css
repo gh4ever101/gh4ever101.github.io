@@ -190,6 +190,7 @@ footer {
 
 .data-list {
     max-height: 20em;
+    min-width: 15em;
     padding: 0;
     overflow-y: scroll;
 }
