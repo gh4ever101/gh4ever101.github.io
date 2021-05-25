@@ -29,7 +29,8 @@ function objToButton(obj) {
 	buf = '<li><button class="btn btn-sml listed-gene '
 	    + obj.key + ' '
 	    + obj.type + ' '
-	    + obj.element + '">';
+	    + obj.element
+	    + '" title="' + obj.name  + '">';
 	buf += '<span>' + obj.name + '</span>';
 	buf += '<div class="listed-img-container g">';
 	buf += '<div class="listed-cont type"></div>';
@@ -39,7 +40,8 @@ function objToButton(obj) {
 	buf = '<li><button class="btn btn-sml listed-monstie '
 	    + obj.key + ' '
 	    + obj.type + ' '
-	    + obj.defaultEl + '">';
+	    + obj.defaultEl
+	    + '" title="' + obj.name  + '">';
 	buf += '<span listed-cont name>' + obj.name + '</span>';
 	buf += '<div class="listed-img-container m">';
 	buf += '<div class="listed-cont type"></div>';
@@ -77,7 +79,7 @@ function importTeam() {
     // try reading the team
     try {
 	// regex to split the elements of the team
-	var importedTeam = $('#export-text-area').val().split(/[\r\n]+|\-/).filter(_=>_);
+	var importedTeam = $('#export-text-area').val().split(/[\r\n]+|\|/).filter(_=>_);
 
 	// iterate through the split imported text
 	for (var i = 0; i < importedTeam.length; i++) {
@@ -118,7 +120,6 @@ function importTeam() {
 	// set the bingos
 	var tmpTeamLength = tmpTeam.length
 	for (var i = 0; i < tmpTeamLength; i++) {
-	    TeamBuilder.currentTeamIndex = i;
 	    updateBingos(tmpTeam[i]);
 	}
 
@@ -388,8 +389,8 @@ function checkBingo(toCheck, bingos) {
  */
 function updateBingos(teamMember) {
     // get the current genes and clear all current bingos
-    var genes = TeamBuilder.team[TeamBuilder.currentTeamIndex].genes;
-    var bingos = TeamBuilder.team[TeamBuilder.currentTeamIndex].bingos;
+    var genes = teamMember.genes;
+    var bingos = teamMember.bingos;
     for (var bingo in bingos) {
 	bingos[bingo] = '0';
     }
@@ -811,8 +812,8 @@ function teamView() {
 		for (var k = 0; k < remainingChars/2; k++) {
 		    exportText += ' ';
 		}
-		if (j%3!=2) {
-		    exportText += ' - ';
+		if (j%3 != 2) {
+		    exportText += ' | ';
 		}
 	    }
 	    exportText += '\r\n\r\n\r\n';
@@ -821,7 +822,7 @@ function teamView() {
 
     // set the export text
     buf += '</ol></section><section id="export"><h2 id="export-header">Import/Export</h2>';
-    buf += '<textarea id="export-text-area">';
+    buf += '<textarea id="export-text-area" spellcheck="false">';
     buf += exportText;
     buf += '</textarea>';
     buf += '<button type="button" class="btn btn-primary btn-small" role="button" id="import-team">Import</button>';
