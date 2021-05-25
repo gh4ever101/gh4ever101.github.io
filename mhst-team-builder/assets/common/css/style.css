@@ -1,10 +1,534 @@
-#monstieList li {
+body {
+    background-color: #f7f7f7;
+    font: 16px/1.5 "Helvetica Neue", Helvetica, sans-serif;
+}
+
+article {
+    margin: auto;
+    width: 90%;
+}
+
+h1 {
+    color: #6060a0;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+h2 {
+    color: #00acac;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-top: 1em;
+    margin-bottom: 0em;
+}
+
+footer {
+    font-size: 0.75em;
+    margin-top: 1em;
+    text-align: right;
+}
+
+#export {
+    background-color: #f0f0f0;
+    border: 1px solid #999;
+    border-radius: 5px;
+    margin-top: 2em;
+}
+
+#team-list li, #monstie-list li, #gene-list li, .bingo-list li {
+    list-style-type: none;
+    margin-top: 0.5em;
+}
+
+.member-container {
+    background-color: #f3f3f3;
+    border: 1px solid #999;
+    border-radius: 5px;
     list-style-type: none;
 }
 
+.delete-button-container {
+    float: right;
+}
+
+.delete-monstie {
+    float: right;
+    font-size: 0.75em;
+}
+
+.team-monstie-container, .bingos-container, .stats-container {
+    box-shadow: 0em 0em 0.1em rgba(50, 50, 50, 0.5);
+    margin-right: 10%;
+    display: inline-block;
+}
+
+.bingo-list {
+    display: inline-block;
+}
+
+.bingo-list li .true {
+    font-weight: bold;
+}
+
+.bingo-status {
+    margin-left: -2em;
+}
+
+#monstie-search {
+    width: 50%;
+}
+
 #export-text-area {
-    width: 40%;
+    width: 80%;
+    height: 30em;
     font-family: monospace;
-    font-size: 10px;
+    font-size: 0.75em;
+    text-align: center;
     white-space: pre;
+}
+
+.data-list {
+    max-height: 30em;
+    overflow-y: scroll;
+}
+
+.highlighted {
+    background-color: #333;
+}
+
+.monstie {
+    background-image: url(../img/icons.png);
+}
+
+.monstie.empty {
+    background-image: url(../img/question_mark.png);
+    width: 72px;
+    height: 72px;
+}
+
+.monstie.aptonoth {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -1px;
+}
+
+.monstie.velocidrome {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -1px;
+}
+
+.monstie.arzuros {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -1px;
+}
+
+.monstie.yian_kut_ku {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -1px;
+}
+
+.monstie.blue_yian_kut_ku {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -1px;
+}
+
+.monstie.popo {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -1px;
+}
+
+.monstie.lagombi {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -1px;
+}
+
+.monstie.bulldrome {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -1px;
+}
+
+.monstie.zamtrios {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -75px;
+}
+
+.monstie.khezu {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -75px;
+}
+
+.monstie.red_khezu {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -75px;
+}
+
+.monstie.apceros {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -75px;
+}
+
+.monstie.gendrome {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -75px;
+}
+
+.monstie.royal_ludroth {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -75px;
+}
+
+.monstie.gypceros {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -75px;
+}
+
+.monstie.nerscylla {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -75px;
+}
+
+.monstie.shrouded_nerscylla {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -149px;
+}
+
+.monstie.qurupeco {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -149px;
+}
+
+.monstie.rathian {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -149px;
+}
+
+.monstie.pink_rathian {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -149px;
+}
+
+.monstie.barroth {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -149px;
+}
+
+.monstie.cephadrome {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -149px;
+}
+
+.monstie.diablos {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -149px;
+}
+
+.monstie.black_diablos {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -149px;
+}
+
+.monstie.tigrex {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -223px;
+}
+
+.monstie.iodrome {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -223px;
+}
+
+.monstie.basarios {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -223px;
+}
+
+.monstie.gravios {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -223px;
+}
+
+.monstie.uragaan {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -223px;
+}
+
+.monstie.brute_tigrex {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -223px;
+}
+
+.monstie.great_jaggi {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -223px;
+}
+
+.monstie.kecha_wacha {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -223px;
+}
+
+.monstie.purple_ludroth {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -297px;
+}
+
+.monstie.yian_garuga {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -297px;
+}
+
+.monstie.congalala {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -297px;
+}
+
+.monstie.emerald_congalala {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -297px;
+}
+
+.monstie.crimson_qurupeco {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -297px;
+}
+
+.monstie.black_gravios {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -297px;
+}
+
+.monstie.zinogre {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -297px;
+}
+
+.monstie.ruby_basarios {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -297px;
+}
+
+.monstie.nargacuga {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -371px;
+}
+
+.monstie.green_nargacuga {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -371px;
+}
+
+.monstie.rathalos {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -371px;
+}
+
+.monstie.azure_rathalos {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -371px;
+}
+
+.monstie.purple_gypceros {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -371px;
+}
+
+.monstie.ash_kecha_wacha {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -371px;
+}
+
+.monstie.lagiacrus {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -371px;
+}
+
+.monstie.ivory_lagiacrus {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -371px;
+}
+
+.monstie.deviljho {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -445px;
+}
+
+.monstie.great_baggi {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -445px;
+}
+
+.monstie.jade_barroth {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -445px;
+}
+
+.monstie.barioth {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -445px;
+}
+
+.monstie.sand_barioth {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -445px;
+}
+
+.monstie.stygian_zinogre {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -445px;
+}
+
+.monstie.brachydios {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -445px;
+}
+
+.monstie.rajang {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -445px;
+}
+
+.monstie.kirin {
+    width: 72px;
+    height: 72px;
+    background-position: -1px -519px;
+}
+
+.monstie.monoblos {
+    width: 72px;
+    height: 72px;
+    background-position: -75px -519px;
+}
+
+.monstie.seregios {
+    width: 72px;
+    height: 72px;
+    background-position: -149px -519px;
+}
+
+.monstie.gold_rathian {
+    width: 72px;
+    height: 72px;
+    background-position: -223px -519px;
+}
+
+.monstie.silver_rathalos {
+    width: 72px;
+    height: 72px;
+    background-position: -297px -519px;
+}
+
+.monstie.kushala_daora {
+    width: 72px;
+    height: 72px;
+    background-position: -371px -519px;
+}
+
+.monstie.teostra {
+    width: 72px;
+    height: 72px;
+    background-position: -445px -519px;
+}
+
+.monstie.great_poogie {
+    width: 72px;
+    height: 72px;
+    background-position: -519px -519px;
+}
+
+.monstie.white_monoblos {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -1px;
+}
+
+.monstie.molten_tigrex {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -75px;
+}
+
+.monstie.oroshi_kirin {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -149px;
+}
+
+.monstie.glavenus {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -223px;
+}
+
+.monstie.kumashira {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -297px;
+}
+
+.monstie.epona {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -371px;
+}
+
+.monstie.kurenai_goukami {
+    width: 72px;
+    height: 72px;
+    background-position: -593px -445px;
 }
