@@ -463,6 +463,16 @@ function updateStatsHTML(teamMember, $statsHTML) {
     var $spd = $statsHTML.find('.spd');
     var $crt = $statsHTML.find('.crt');
     var $heal = $statsHTML.find('.heal');
+    var $dragonAtk = $statsHTML.find('.el-atk.dragon');
+    var $fireAtk = $statsHTML.find('.el-atk.fire');
+    var $iceAtk = $statsHTML.find('.el-atk.ice');
+    var $thunderAtk = $statsHTML.find('.el-atk.thunder');
+    var $waterAtk = $statsHTML.find('.el-atk.water');
+    var $dragonRes = $statsHTML.find('.el-res.dragon');
+    var $fireRes = $statsHTML.find('.el-res.fire');
+    var $iceRes = $statsHTML.find('.el-res.ice');
+    var $thunderRes = $statsHTML.find('.el-res.thunder');
+    var $waterRes = $statsHTML.find('.el-res.water');
 
     // set all stats to be unmodified
     $hp.removeClass('modp');
@@ -475,6 +485,26 @@ function updateStatsHTML(teamMember, $statsHTML) {
     $crt.removeClass('modn');
     $heal.removeClass('modp');
     $heal.removeClass('modn');
+    $dragonAtk.removeClass('modp');
+    $dragonAtk.removeClass('modn');
+    $fireAtk.removeClass('modp');
+    $fireAtk.removeClass('modn');
+    $iceAtk.removeClass('modp');
+    $iceAtk.removeClass('modn');
+    $thunderAtk.removeClass('modp');
+    $thunderAtk.removeClass('modn');
+    $waterAtk.removeClass('modp');
+    $waterAtk.removeClass('modn');
+    $dragonRes.removeClass('modp');
+    $dragonRes.removeClass('modn');
+    $fireRes.removeClass('modp');
+    $fireRes.removeClass('modn');
+    $iceRes.removeClass('modp');
+    $iceRes.removeClass('modn');
+    $thunderRes.removeClass('modp');
+    $thunderRes.removeClass('modn');
+    $waterRes.removeClass('modp');
+    $waterRes.removeClass('modn');
 
     // set the base stats for the monstie
     var baseStats = {
@@ -483,7 +513,18 @@ function updateStatsHTML(teamMember, $statsHTML) {
 	def: parseInt(Monsties[teamMember.monstie].stats.def),
 	spd: parseInt(Monsties[teamMember.monstie].stats.spd),
 	crt: 0,
-	heal: 0
+	heal: 0,
+	// TODO: change eAttk to eAtk
+	dragonAtk: parseInt(Monsties[teamMember.monstie].eAttk.dragon),
+	fireAtk: parseInt(Monsties[teamMember.monstie].eAttk.fire),
+	iceAtk: parseInt(Monsties[teamMember.monstie].eAttk.ice),
+	thunderAtk: parseInt(Monsties[teamMember.monstie].eAttk.thunder),
+	waterAtk: parseInt(Monsties[teamMember.monstie].eAttk.water),
+	dragonRes: parseInt(Monsties[teamMember.monstie].eRes.dragon),
+	fireRes: parseInt(Monsties[teamMember.monstie].eRes.fire),
+	iceRes: parseInt(Monsties[teamMember.monstie].eRes.ice),
+	thunderRes: parseInt(Monsties[teamMember.monstie].eRes.thunder),
+	waterRes: parseInt(Monsties[teamMember.monstie].eRes.water)
     }
 
     // calculate stat modifiers from genes
@@ -494,6 +535,17 @@ function updateStatsHTML(teamMember, $statsHTML) {
 	// TODO: change the crit key to crt
 	baseStats['crt'] += parseInt(Genes[teamMember.genes[i]].statMods['crit']);
 	baseStats['heal'] += parseInt(Genes[teamMember.genes[i]].statMods['heal']);
+	// TODO: change eAttk to eAtk
+	baseStats['dragonAtk'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['dragon']);
+	baseStats['fireAtk'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['fire']);
+	baseStats['iceAtk'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['ice']);
+	baseStats['thunderAtk'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['thunder']);
+	baseStats['waterAtk'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['water']);
+	baseStats['dragonRes'] += parseInt(Genes[teamMember.genes[i]].eResMods['dragon']);
+	baseStats['fireRes'] += parseInt(Genes[teamMember.genes[i]].eResMods['fire']);
+	baseStats['iceRes'] += parseInt(Genes[teamMember.genes[i]].eResMods['ice']);
+	baseStats['thunderRes'] += parseInt(Genes[teamMember.genes[i]].eResMods['thunder']);
+	baseStats['waterRes'] += parseInt(Genes[teamMember.genes[i]].eResMods['water']);
     }
 
     // calculate stat modifiers from bingos
@@ -505,35 +557,85 @@ function updateStatsHTML(teamMember, $statsHTML) {
     }
 
     // set the element text to be the correct stat
-    if (baseStats['hp']==0) {
+    if (baseStats['hp'] == 0) {
 	$hp.html('-');
     } else {
 	$hp.html(baseStats['hp']);
     }
-    if (baseStats['atk']==0) {
+    if (baseStats['atk'] == 0) {
 	$atk.html('-');
     } else {
 	$atk.html(baseStats['atk']);
     }
-    if (baseStats['def']==0) {
+    if (baseStats['def'] == 0) {
 	$def.html('-');
     } else {
 	$def.html(baseStats['def']);
     }
-    if (baseStats['spd']==0) {
+    if (baseStats['spd'] == 0) {
 	$spd.html('-');
     } else {
 	$spd.html(baseStats['spd']);
     }
-    if (baseStats['crt']==0) {
+    if (baseStats['crt'] == 0) {
 	$crt.html('-');
     } else {
 	$crt.html(baseStats['crt']);
     }
-    if (baseStats['heal']==0) {
+    if (baseStats['heal'] == 0) {
 	$heal.html('-');
     } else {
 	$heal.html(baseStats['heal']);
+    }
+    if (baseStats['dragonAtk'] == 0) {
+	$dragonAtk.html('-');
+    } else {
+	$dragonAtk.html(baseStats['dragonAtk']);
+    }
+    if (baseStats['fireAtk'] == 0) {
+	$fireAtk.html('-');
+    } else {
+	$fireAtk.html(baseStats['fireAtk']);
+    }
+    if (baseStats['iceAtk'] == 0) {
+	$iceAtk.html('-');
+    } else {
+	$iceAtk.html(baseStats['iceAtk']);
+    }
+    if (baseStats['thunderAtk'] == 0) {
+	$thunderAtk.html('-');
+    } else {
+	$thunderAtk.html(baseStats['thunderAtk']);
+    }
+    if (baseStats['waterAtk'] == 0) {
+	$waterAtk.html('-');
+    } else {
+	$waterAtk.html(baseStats['waterAtk']);
+    }
+    if (baseStats['dragonRes'] == 0) {
+	$dragonRes.html('-');
+    } else {
+	$dragonRes.html(baseStats['dragonRes']);
+    }
+    if (baseStats['fireRes'] == 0) {
+	$fireRes.html('-');
+    } else {
+	$fireRes.html(baseStats['fireRes']);
+    }
+    if (baseStats['iceRes'] == 0) {
+	$iceRes.html('-');
+    } else {
+	$iceRes.html(baseStats['iceRes']);
+    }
+    if (baseStats['thunderRes'] == 0) {
+	$thunderRes.html('-');
+    } else {
+	$thunderRes.html(baseStats['thunderRes']);
+    }
+    if (baseStats['waterRes'] == 0) {
+	$waterRes.html('-');
+    } else {
+	$waterRes.html(baseStats['waterRes']);
     }
 
     // set classes depending on if stats were modified
@@ -562,6 +664,56 @@ function updateStatsHTML(teamMember, $statsHTML) {
     } else if (baseStats['heal'] < 0) {
 	$heal.addClass('modn');
     }
+    if (baseStats['dragonAtk'] > parseInt(Monsties[teamMember.monstie].eAttk.dragon)) {
+	$dragonAtk.addClass('modp');
+    } else if (baseStats['dragonAtk'] < parseInt(Monsties[teamMember.monstie].eAttk.dragon)) {
+	$dragonAtk.addClass('modn');
+    }
+    if (baseStats['fireAtk'] > parseInt(Monsties[teamMember.monstie].eAttk.fire)) {
+	$fireAtk.addClass('modp');
+    } else if (baseStats['fireAtk'] < parseInt(Monsties[teamMember.monstie].eAttk.fiire)) {
+	$fireAtk.addClass('modn');
+    }
+    if (baseStats['iceAtk'] > parseInt(Monsties[teamMember.monstie].eAttk.ice)) {
+	$iceAtk.addClass('modp');
+    } else if (baseStats['iceAtk'] < parseInt(Monsties[teamMember.monstie].eAttk.ice)) {
+	$iceAtk.addClass('modn');
+    }
+    if (baseStats['thunderAtk'] > parseInt(Monsties[teamMember.monstie].eAttk.thunder)) {
+	$thunderAtk.addClass('modp');
+    } else if (baseStats['thunderAtk'] < parseInt(Monsties[teamMember.monstie].eAttk.thunder)) {
+	$thunderAtk.addClass('modn');
+    }
+    if (baseStats['waterAtk'] > parseInt(Monsties[teamMember.monstie].eAttk.water)) {
+	$waterAtk.addClass('modp');
+    } else if (baseStats['waterAtk'] < parseInt(Monsties[teamMember.monstie].eAttk.water)) {
+	$waterAtk.addClass('modn');
+    }
+    if (baseStats['dragonRes'] > parseInt(Monsties[teamMember.monstie].eRes.dragon)) {
+	$dragonRes.addClass('modp');
+    } else if (baseStats['dragonRes'] < parseInt(Monsties[teamMember.monstie].eRes.dragon)) {
+	$dragonRes.addClass('modn');
+    }
+    if (baseStats['fireRes'] > parseInt(Monsties[teamMember.monstie].eRes.fire)) {
+	$fireRes.addClass('modp');
+    } else if (baseStats['fireRes'] < parseInt(Monsties[teamMember.monstie].eRes.fiire)) {
+	$fireRes.addClass('modn');
+    }
+    if (baseStats['iceRes'] > parseInt(Monsties[teamMember.monstie].eRes.ice)) {
+	$iceRes.addClass('modp');
+    } else if (baseStats['iceRes'] < parseInt(Monsties[teamMember.monstie].eRes.ice)) {
+	$iceRes.addClass('modn');
+    }
+    if (baseStats['thunderRes'] > parseInt(Monsties[teamMember.monstie].eRes.thunder)) {
+	$thunderRes.addClass('modp');
+    } else if (baseStats['thunderRes'] < parseInt(Monsties[teamMember.monstie].eRes.thunder)) {
+	$thunderRes.addClass('modn');
+    }
+    if (baseStats['waterRes'] > parseInt(Monsties[teamMember.monstie].eRes.water)) {
+	$waterRes.addClass('modp');
+    } else if (baseStats['waterRes'] < parseInt(Monsties[teamMember.monstie].eRes.water)) {
+	$waterRes.addClass('modn');
+    }
 }
 
 /**
@@ -584,7 +736,7 @@ function addMonstie(e) {
     updateMonstieHTML(teamMember, $('.monstie-icon'));
 
     // update the HTML for the stats table
-    updateStatsHTML(teamMember, $('.stats-table'));
+    updateStatsHTML(teamMember, $('.stats-container'));
 
     // set the currently active gene search slot to the next input field
     TeamBuilder.$currentBingoSlot = $('.gene-search.0');
@@ -616,7 +768,7 @@ function addGene(e) {
     updateMonstieHTML(teamMember, $('.monstie-icon.'+teamMember.monstie));
 
     // update the HTML for the stats of the monstie
-    updateStatsHTML(teamMember, $('.stats-table'));
+    updateStatsHTML(teamMember, $('.stats-container'));
 
     // set the currently active gene search slot to the next input field
     if (slotIndex == 8) {
@@ -660,7 +812,16 @@ function builderView(currentTargetClass) {
 	+ '<th class="builder stat-header">Crt</th><th class="builder stat-header">Heal</th></tr><tr>';
     buf += '<td class="builder stat hp"></td><td class="builder stat atk"></td>'
 	+ '<td class="builder stat def"></td><td class="builder stat spd"></td>'
-	+ '<td class="builder stat crt"></td><td class="builder stat heal"></td></tr></table></div></div>';
+	+ '<td class="builder stat crt"></td><td class="builder stat heal"></td></tr></table>';
+    buf += '<table class="builder el-table">';
+    buf += '<tr><th class="builder stat-header"></th><th class="builder stat-header dragon"></th><th class="builder stat-header fire"></th><th class="builder stat-header ice"></th>'
+	+ '<th class="builder stat-header thunder"></th><th class="builder stat-header water"></th></tr>'
+    buf += '<tr><th class="builder stat-header el-atk">Atk</td><td class="builder stat el-atk dragon"></td><td class="builder stat el-atk fire"></td>'
+	+ '<td class="builder stat el-atk ice"></td><td class="builder stat el-atk thunder"></td>'
+	+ '<td class="builder stat el-atk water"></td></tr>';
+    buf += '<tr><th class="builder stat-header el-res">Res</td><td class="builder stat el-res dragon"></td><td class="builder stat el-res fire"></td>'
+	+ '<td class="builder stat el-res ice"></td><td class="builder stat el-res thunder"></td>'
+	+ '<td class="builder stat el-res water"></td></tr></table></div></div>';
 
     // prepare the bingos HTML
     buf += '<div class="builder bingos-container">';
@@ -700,7 +861,7 @@ function builderView(currentTargetClass) {
     // update the monstie element, bingos, and stats HTML
     updateMonstieHTML(teamMember, $('.monstie-icon'));
     updateBingosHTML(teamMember, $('.bingo-list'));
-    updateStatsHTML(teamMember, $('.stats-table'));
+    updateStatsHTML(teamMember, $('.stats-container'));
 
     // set the focused input
     TeamBuilder.$currentBingoSlot = $('.gene-search.0');
@@ -757,7 +918,16 @@ function teamView() {
 	    + '<th class="team stat-header">Crt</th><th class="team stat-header">Heal</th></tr><tr>';
 	buf += '<td class="team stat hp"></td><td class="team stat atk"></td>'
 	    + '<td class="team stat def"></td><td class="team stat spd"></td>'
-	    + '<td class="team stat crt"></td><td class="team stat heal"></td></tr></table></div></div>';
+	    + '<td class="team stat crt"></td><td class="team stat heal"></td></tr></table>';
+	buf += '<table class="team el-table">';
+	buf += '<tr><th class="team stat-header"></th><th class="team stat-header dragon"></th><th class="team stat-header fire"></th><th class="team stat-header ice"></th>'
+	    + '<th class="team stat-header thunder"></th><th class="team stat-header water"></th></tr>'
+	buf += '<tr><th class="team stat-header el-atk">Atk</td><td class="team stat el-atk dragon"></td><td class="team stat el-atk fire"></td>'
+	    + '<td class="team stat el-atk ice"></td><td class="team stat el-atk thunder"></td>'
+	    + '<td class="team stat el-atk water"></td></tr>';
+	buf += '<tr><th class="team stat-header el-res">Res</td><td class="team stat el-res dragon"></td><td class="team stat el-res fire"></td>'
+	    + '<td class="team stat el-res ice"></td><td class="team stat el-res thunder"></td>'
+	    + '<td class="team stat el-res water"></td></tr></table></div></div>';
 
 	// prepare the bingos HTML for the current monstie
 	buf += '<div class="team bingos-container">';
@@ -837,7 +1007,7 @@ function teamView() {
 	var $li = $lis.eq(i);
 	updateMonstieHTML(TeamBuilder.team[i], $li.find('.monstie-icon'));
 	updateBingosHTML(TeamBuilder.team[i], $li.find('.bingo-list'));
-	updateStatsHTML(TeamBuilder.team[i], $li.find('.stats-table'));
+	updateStatsHTML(TeamBuilder.team[i], $li.find('.stats-container'));
     }
 
     // set the export text

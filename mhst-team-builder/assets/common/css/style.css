@@ -122,6 +122,7 @@ footer {
 }
 
 .builder-container.top {
+    align-items: center;
     display: flex;
     justify-content: space-evenly;
 }
@@ -142,18 +143,32 @@ footer {
     width: 70%;
 }
 
-.stats-table {
-    align: center;
-    margin: 0 auto;
+.stats-container {
+    display: block;
+}
+
+.stats-container table {
     text-align: center;
+}
+
+.stats-container td {
+    padding-top: 0.1em;
 }
 
 .stats-table th, .stats-table td {
     padding: 0 1em;
 }
 
-.stats-table td {
-    padding-top: 0.1em;
+.stats-table {
+    margin: 0 auto;
+}
+
+.el-table {
+    margin: 1.5em auto;
+}
+
+.el-table th, .el-table td {
+    padding: 0 1.5em;
 }
 
 .stat.modp {
@@ -166,17 +181,72 @@ footer {
     font-weight: bold;
 }
 
+.stat-header.dragon {
+    background-image: url(../img/dragon.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 24px;
+    width: 24px;
+}
+
+.stat-header.fire {
+    background-image: url(../img/fire.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 24px;
+    width: 24px;
+}
+
+.stat-header.ice {
+    background-image: url(../img/ice.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 24px;
+    width: 24px;
+}
+
+.stat-header.thunder {
+    background-image: url(../img/thunder.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 24px;
+    width: 24px;
+}
+
+.stat-header.water {
+    background-image: url(../img/water.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 24px;
+    width: 24px;
+}
+
+.bingos-container {
+    align-items: center;
+    display: flex;
+}
+
 .bingo-list {
     display: inline-block;
+    padding: 0;
+}
+
+.bingo-list.left {
+    margin: 1.5em 0.5em 0 1.5em;
 }
 
 .bingo-list.right {
-    margin-right: 1.5em;
+    margin: 1.5em 1.5em 0 0.5em;
 }
 
 .bingo-list li {
-    font-size: 0.9em;
-    margin-bottom: 0.5em;
+    font-size: 0.8em;
+    margin-bottom: 1.5em;
     text-align: center;
 }
 
@@ -189,7 +259,7 @@ footer {
 }
 
 .data-list {
-    max-height: 20em;
+    max-height: 27em;
     min-width: 15em;
     padding: 0;
     overflow-y: scroll;
