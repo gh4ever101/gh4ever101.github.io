@@ -26,15 +26,25 @@ function findWithName(name, dict) {
 function objToButton(obj) {
     var buf;
     if (obj.c === 'gene') {
-	buf = '<li><button class="listed-gene ' + obj.key  + '">';
-	buf += '<span>'+obj.name+'</span>';
-	buf += '</button></li>';
+	buf = '<li><button class="btn btn-sml listed-gene '
+	    + obj.key + ' '
+	    + obj.type + ' '
+	    + obj.element + '">';
+	buf += '<span>' + obj.name + '</span>';
+	buf += '<div class="listed-img-container g">';
+	buf += '<div class="listed-cont type"></div>';
+	buf += '<div class="listed-cont element"></div>';
+	buf += '</div></button></li>';
     } else {
-	buf = '<li><button class="listed-monstie ' + obj.key  + '">';
-	buf += '<span>'+obj.name+'&nbsp</span>';
-	buf += '<span>'+obj.type+'&nbsp</span>';
-	buf += '<span>'+obj.defaultElement+'&nbsp</span>';
-	buf += '</button></li>';
+	buf = '<li><button class="btn btn-sml listed-monstie '
+	    + obj.key + ' '
+	    + obj.type + ' '
+	    + obj.defaultEl + '">';
+	buf += '<span listed-cont name>' + obj.name + '</span>';
+	buf += '<div class="listed-img-container m">';
+	buf += '<div class="listed-cont type"></div>';
+	buf += '<div class="listed-cont element"></div>';
+	buf += '</div></button></li>';
     }
     return buf;
 }
@@ -49,10 +59,10 @@ function buttonToKey(buttonClass) {
 	return 'empty';
     } else {
 	classes = buttonClass.split(' ');
-	if (classes.length == 1) {
+	if (classes.length < 4) {
 	    return 'empty';
 	} else {
-	    return classes[1];
+	    return classes[3];
 	}
     }
 }
@@ -215,9 +225,7 @@ function filterMonsties(filter = true) {
     if (counter > 0) {
 	var $highlightedMonstie = $('#monstie-list').find('.'+highlightedKey);
 	$highlightedMonstie[0].scrollIntoView({
-	    behavior: 'auto',
-	    block: 'center',
-	    intline: 'center'
+	    block: 'nearest'
 	});
 	$highlightedMonstie.addClass('highlighted');
     }
@@ -292,9 +300,7 @@ function filterGenes(filter = true) {
     if (counter > 0) {
 	var $highlightedGene = $('#gene-list').find('.'+highlightedKey);
 	$highlightedGene[0].scrollIntoView({
-	    behavior: 'auto',
-	    block: 'center',
-	    intline: 'center'
+	    block: 'nearest'
 	});
 	$highlightedGene.addClass('highlighted');
     }
@@ -332,12 +338,13 @@ function updateMonstieHTML(teamMember, $monstieHTML) {
     }
 
     // set the element class to be the correct monstie in addition to its element
+    $monstieHTML.attr('class', $monstieHTML.attr('class').split(' ')[0]+' monstie-icon '+teamMember.monstie);
     if (baseEAttks[aMax] < 4) {
-	$monstieHTML.attr('class', $monstieHTML.attr('class').split(' ')[0]+' monstie '
-			  +teamMember.monstie+' '+Monsties[teamMember.monstie].defaultEl);
+	$monstieHTML.html('<div class="monstie-element-icon '
+			  +Monsties[teamMember.monstie].defaultEl+'"></div>');
     } else {
-	$monstieHTML.attr('class', $monstieHTML.attr('class').split(' ')[0]+' monstie '
-			  +teamMember.monstie+' '+aMax);
+	$monstieHTML.html('<div class="monstie-element-icon '
+			  +aMax+'"></div>');
     }
 }
 
@@ -448,6 +455,26 @@ function updateBingosHTML(teamMember, $bingosHTML) {
  * @param {jQuery} $statsHTML The document element to update.
  */
 function updateStatsHTML(teamMember, $statsHTML) {
+    // get all stat HTML elements
+    var $hp = $statsHTML.find('.hp');
+    var $atk = $statsHTML.find('.atk');
+    var $def = $statsHTML.find('.def');
+    var $spd = $statsHTML.find('.spd');
+    var $crt = $statsHTML.find('.crt');
+    var $heal = $statsHTML.find('.heal');
+
+    // set all stats to be unmodified
+    $hp.removeClass('modp');
+    $hp.removeClass('modn');
+    $atk.removeClass('modp');
+    $atk.removeClass('modn');
+    $def.removeClass('modp');
+    $def.removeClass('modn');
+    $crt.removeClass('modp');
+    $crt.removeClass('modn');
+    $heal.removeClass('modp');
+    $heal.removeClass('modn');
+
     // set the base stats for the monstie
     var baseStats = {
 	hp: parseInt(Monsties[teamMember.monstie].stats.hp),
@@ -463,25 +490,77 @@ function updateStatsHTML(teamMember, $statsHTML) {
 	baseStats['hp'] += parseInt(Genes[teamMember.genes[i]].statMods['hp']);
 	baseStats['atk'] += parseInt(Genes[teamMember.genes[i]].statMods['atk']);
 	baseStats['def'] += parseInt(Genes[teamMember.genes[i]].statMods['def']);
+	// TODO: change the crit key to crt
 	baseStats['crt'] += parseInt(Genes[teamMember.genes[i]].statMods['crit']);
 	baseStats['heal'] += parseInt(Genes[teamMember.genes[i]].statMods['heal']);
     }
 
     // calculate stat modifiers from bingos
-    if (teamMember.bingos['any']==='1') {
+    if (teamMember.bingos['any'] === '1') {
 	baseStats['hp'] += 50;
     }
-    if (teamMember.bingos['nelem']==='1') {
+    if (teamMember.bingos['nelem'] === '1') {
 	baseStats['spd']++;
     }
 
     // set the element text to be the correct stat
-    $statsHTML.find('.hp').html(baseStats['hp']);
-    $statsHTML.find('.atk').html(baseStats['atk']);
-    $statsHTML.find('.def').html(baseStats['def']);
-    $statsHTML.find('.spd').html(baseStats['spd']);
-    $statsHTML.find('.crt').html(baseStats['crt']);
-    $statsHTML.find('.heal').html(baseStats['heal']);
+    if (baseStats['hp']==0) {
+	$hp.html('-');
+    } else {
+	$hp.html(baseStats['hp']);
+    }
+    if (baseStats['atk']==0) {
+	$atk.html('-');
+    } else {
+	$atk.html(baseStats['atk']);
+    }
+    if (baseStats['def']==0) {
+	$def.html('-');
+    } else {
+	$def.html(baseStats['def']);
+    }
+    if (baseStats['spd']==0) {
+	$spd.html('-');
+    } else {
+	$spd.html(baseStats['spd']);
+    }
+    if (baseStats['crt']==0) {
+	$crt.html('-');
+    } else {
+	$crt.html(baseStats['crt']);
+    }
+    if (baseStats['heal']==0) {
+	$heal.html('-');
+    } else {
+	$heal.html(baseStats['heal']);
+    }
+
+    // set classes depending on if stats were modified
+    if (baseStats['hp'] > parseInt(Monsties[teamMember.monstie].stats.hp)) {
+	$hp.addClass('modp');
+    } else if (baseStats['hp'] < parseInt(Monsties[teamMember.monstie].stats.hp)) {
+	$hp.addClass('modn');
+    }
+    if (baseStats['atk'] > parseInt(Monsties[teamMember.monstie].stats.atk)) {
+	$atk.addClass('modp');
+    } else if (baseStats['atk'] < parseInt(Monsties[teamMember.monstie].stats.atk)) {
+	$atk.addClass('modn');
+    }
+    if (baseStats['def'] > parseInt(Monsties[teamMember.monstie].stats.def)) {
+	$def.addClass('modp');
+    } else if (baseStats['def'] < parseInt(Monsties[teamMember.monstie].stats.def)) {
+	$def.addClass('modn');
+    }
+    if (baseStats['crt'] > 0) {
+	$crt.addClass('modp');
+    } else if (baseStats['crt'] < 0) {
+	$hp.addClass('crt');
+    }
+    if (baseStats['heal'] > 0) {
+	$heal.addClass('modp');
+    } else if (baseStats['heal'] < 0) {
+	$heal.addClass('modn');
+    }
 }
 
 /**
@@ -501,7 +580,7 @@ function addMonstie(e) {
     $('.monstie-search').val(Monsties[monstieKey].name);
 
     // update the HTML for the monstie icon
-    updateMonstieHTML(teamMember, $('.monstie'));
+    updateMonstieHTML(teamMember, $('.monstie-icon'));
 
     // update the HTML for the stats table
     updateStatsHTML(teamMember, $('.stats-table'));
@@ -533,7 +612,7 @@ function addGene(e) {
     updateBingosHTML(teamMember, $('.bingo-list'));
 
     // update the HTML for the monstie icon in case the element changed
-    updateMonstieHTML(teamMember, $('.monstie.'+teamMember.monstie));
+    updateMonstieHTML(teamMember, $('.monstie-icon.'+teamMember.monstie));
 
     // update the HTML for the stats of the monstie
     updateStatsHTML(teamMember, $('.stats-table'));
@@ -556,21 +635,49 @@ function builderView(currentTargetClass) {
     var monstObj = Monsties[teamMember.monstie];
 
     // set the buffer
-    var buf = '<h2>Edit</h2><section id="builder">';
-    buf += '<button type="button" class="btn btn-secondary builder" role="button" id="team-button">Back</button>';
-    buf += '<div title="' + monstObj.name + '" class="builder member-container">';
+    var buf = '<div id="builder-view-container">';
+    buf += '<section id="builder">';
+    buf += '<div class="builder member-container" title="' + monstObj.name + '">';
+    buf += '<h2 id="builder-header">Edit</h2>'
 
-    // set the delete button
-    buf += '<button type="button" class="btn btn-secondary builder delete-monstie" role="button">x</button>';
+    // set the back and clear buttons
+    buf += '<button type="button" class="btn btn-secondary builder" role="button" id="back-button">Back</button>';
+    buf += '<button type="button" class="btn btn-danger btn-sm builder delete-monstie" role="button">Clear</button>';
 
     // set the monstie icon
     buf += '<div class="builder builder-container">';
+    buf += '<div class="builder builder-container top">';
+    buf += '<div class="builder monstie-stats-container">';
     buf += '<div class="builder monstie-container">';
-    buf += '<div class="builder monstie"></div>';
+    buf += '<div class="builder monstie-icon"></div>';
     buf += '<input class="builder monstie-search" value="' + monstObj.name + '"></input></div>';
 
+    // prepare the stats HTML
+    buf += '<div class="builder stats-container"><table class="builder stats-table">';
+    buf += '<tr><th class="builder stat-header">HP</th><th class="builder stat-header">Atk</th><th class="builder stat-header">'
+	+ 'Def</th><th class="builder stat-header">Spd</th>'
+	+ '<th class="builder stat-header">Crt</th><th class="builder stat-header">Heal</th></tr><tr>';
+    buf += '<td class="builder stat hp"></td><td class="builder stat atk"></td>'
+	+ '<td class="builder stat def"></td><td class="builder stat spd"></td>'
+	+ '<td class="builder stat crt"></td><td class="builder stat heal"></td></tr></table></div></div>';
+
+    // prepare the bingos HTML
+    buf += '<div class="builder bingos-container">';
+    buf += '<ul class="builder bingo-list left">';
+    buf += '<li><span class="builder bingo-status dragon">Dragon Bingo</span></li>';
+    buf += '<li><span class="builder bingo-status fire">Fire Bingo</span></li>';
+    buf += '<li><span class="builder bingo-status ice">Ice Bingo</span></li>';
+    buf += '<li><span class="builder bingo-status thunder">Thunder Bingo</span></li>';
+    buf += '<li><span class="builder bingo-status water">Water Bingo</span></li></ul>';
+    buf += '<ul class="builder bingo-list right">';
+    buf += '<li><span class="builder bingo-status power">Power Bingo</span></li>';
+    buf += '<li><span class="builder bingo-status speed">Speed Bingo</span></li>';
+    buf += '<li><span class="builder bingo-status technical">Technical Bingo</span></li>';
+    buf += '<li><span class="builder bingo-status any">Anything Bingo</span></li>';
+    buf += '<li><span class="builder bingo-status nelem">Non-Elem Bingo</span></li></ul></div></div>';
+
     // set the gene search table
-    buf += '<div class="builder gene-search-container">'
+    buf += '<div class="builder gene-search-container">';
     buf += '<table class="builder gene-search-table">';
     for (var i = 0; i < 9; i++) {
 	if (i%3 == 0) {
@@ -583,38 +690,14 @@ function builderView(currentTargetClass) {
 	}
     }
 
-    // prepare the bingos HTML
-    buf += '</table></div><div class="builder bingos-container">';
-    buf += '<ul class="builder bingo-list left">';
-    buf += '<li><span class="builder bingo-status dragon">Dragon Bingo</span></li>';
-    buf += '<li><span class="builder bingo-status fire">Fire Bingo</span></li>';
-    buf += '<li><span class="builder bingo-status ice">Ice Bingo</span></li>';
-    buf += '<li><span class="builder bingo-status thunder">Thunder Bingo</span></li>';
-    buf += '<li><span class="builder bingo-status water">Water Bingo</span></li></ul>';
-    buf += '<ul class="builder bingo-list right">';
-    buf += '<li><span class="builder bingo-status power">Power Bingo</span></li>';
-    buf += '<li><span class="builder bingo-status speed">Speed Bingo</span></li>';
-    buf += '<li><span class="builder bingo-status technical">Technical Bingo</span></li>';
-    buf += '<li><span class="builder bingo-status any">Anything Bingo</span></li>';
-    buf += '<li><span class="builder bingo-status nelem">Non-Elem Bingo</span></li></ul></div>';
-
-    // prepare the stats HTML
-    buf += '<div class="builder stats-container"><table class="builder stats-table">';
-    buf += '<tr><th class="builder stat-header">HP</th><th class="builder stat-header">Atk</th><th class="builder stat-header">'
-	+ 'Def</th><th class="builder stat-header">Spd</th>'
-	+ '<th class="builder stat-header">Crt</th><th class="builder stat-header">Heal</th></tr><tr>';
-    buf += '<td class="builder stat hp"></td><td class="builder stat atk"></td>'
-	+ '<td class="builder stat def"></td><td class="builder stat spd"></td>'
-	+ '<td class="builder stat crt"></td><td class="builder stat heal"></td></tr></table></div></section>';
-
     // prepare the monstie and gene list HTML
-    buf += '<section id="data-list-section"><div id="data-list-container"></div></section>';
+    buf += '</table></div></section><section id="data-list-section"><div id="data-list-container"></div></section></div>';
 
     // set the HTML for the builder view
     $('#viewer').html(buf);
 
     // update the monstie element, bingos, and stats HTML
-    updateMonstieHTML(teamMember, $('.monstie'));
+    updateMonstieHTML(teamMember, $('.monstie-icon'));
     updateBingosHTML(teamMember, $('.bingo-list'));
     updateStatsHTML(teamMember, $('.stats-table'));
 
@@ -637,7 +720,8 @@ function builderView(currentTargetClass) {
  */
 function teamView() {
     // set the buffer and team export text
-    var buf = '<h2>Your Team</h2><section id="team"><ol id="team-list">';
+    var buf = '<section id="team">';
+    buf += '<ol id="team-list">';
     var exportText = '';
 
     // iterate through the team
@@ -649,15 +733,45 @@ function teamView() {
 	// set the list element for the current team member
 	buf += '<li title="' + monstObj.name + '" class="team member-container">';
 
-	// set the delete button
-	buf += '<button type="button" class="btn btn-secondary team delete-monstie" role="button">x</button>';
+	// set the team section title if it is the first team member
+	if (i == 0) {
+	    buf += '<h2 id="team-header">Your Team</h2>'
+	}
+
+	// set the clear button
+	buf += '<button type="button" class="btn btn-danger btn-sm team delete-monstie" role="button">Clear</button>';
 
 	// set the monstie icon
 	buf += '<div class="team builder-container">';
+	buf += '<div class="team builder-container top">';
+	buf += '<div class="team monstie-stats-container">';
 	buf += '<div class="team monstie-container">';
-	buf += '<div class="team monstie"></div>';
+	buf += '<div class="team monstie-icon"></div>';
 	buf += '<input class="team monstie-search" value="' + monstObj.name + '"></input></div>';
 
+	// prepare the stats HTML for the current monstie
+	buf += '<div class="team stats-container"><table class="team stats-table">';
+	buf += '<tr><th class="team stat-header">HP</th><th class="team stat-header">Atk</th><th class="team stat-header">'
+	    + 'Def</th><th class="team stat-header">Spd</th>'
+	    + '<th class="team stat-header">Crt</th><th class="team stat-header">Heal</th></tr><tr>';
+	buf += '<td class="team stat hp"></td><td class="team stat atk"></td>'
+	    + '<td class="team stat def"></td><td class="team stat spd"></td>'
+	    + '<td class="team stat crt"></td><td class="team stat heal"></td></tr></table></div></div>';
+
+	// prepare the bingos HTML for the current monstie
+	buf += '<div class="team bingos-container">';
+	buf += '<ul class="team bingo-list left">';
+	buf += '<li><span class="team bingo-status dragon">Dragon Bingo</span></li>';
+	buf += '<li><span class="team bingo-status fire">Fire Bingo</span></li>';
+	buf += '<li><span class="team bingo-status ice">Ice Bingo</span></li>';
+	buf += '<li><span class="team bingo-status thunder">Thunder Bingo</span></li>';
+	buf += '<li><span class="team bingo-status water">Water Bingo</span></li></ul>';
+	buf += '<ul class="team bingo-list right">';
+	buf += '<li><span class="team bingo-status power">Power Bingo</span></li>';
+	buf += '<li><span class="team bingo-status speed">Speed Bingo</span></li>';
+	buf += '<li><span class="team bingo-status technical">Technical Bingo</span></li>';
+	buf += '<li><span class="team bingo-status any">Anything Bingo</span></li>';
+	buf += '<li><span class="team bingo-status nelem">Non-Elem Bingo</span></li></ul></div></div>';
 
 	// set the gene search table for the current monstie
 	buf += '<div class="team gene-search-container">'
@@ -672,30 +786,7 @@ function teamView() {
 		buf += '</tr>';
 	    }
 	}
-
-	// prepare the bingos HTML for the current monstie
-	buf += '</table></div><div class="team bingos-container">';
-	buf += '<ul class="team bingo-list left">';
-	buf += '<li><span class="team bingo-status dragon">Dragon Bingo</span></li>';
-	buf += '<li><span class="team bingo-status fire">Fire Bingo</span></li>';
-	buf += '<li><span class="team bingo-status ice">Ice Bingo</span></li>';
-	buf += '<li><span class="team bingo-status thunder">Thunder Bingo</span></li>';
-	buf += '<li><span class="team bingo-status water">Water Bingo</span></li></ul>';
-	buf += '<ul class="team bingo-list right">';
-	buf += '<li><span class="team bingo-status power">Power Bingo</span></li>';
-	buf += '<li><span class="team bingo-status speed">Speed Bingo</span></li>';
-	buf += '<li><span class="team bingo-status technical">Technical Bingo</span></li>';
-	buf += '<li><span class="team bingo-status any">Anything Bingo</span></li>';
-	buf += '<li><span class="team bingo-status nelem">Non-Elem Bingo</span></li></ul></div>';
-
-	// prepare the stats HTML for the current monstie
-	buf += '<div class="team stats-container"><table class="team stats-table">';
-	buf += '<tr><th class="team stat-header">HP</th><th class="team stat-header">Atk</th><th class="team stat-header">'
-	    + 'Def</th><th class="team stat-header">Spd</th>'
-	    + '<th class="team stat-header">Crt</th><th class="team stat-header">Heal</th></tr><tr>';
-	buf += '<td class="team stat hp"></td><td class="team stat atk"></td>'
-	    + '<td class="team stat def"></td><td class="team stat spd"></td>'
-	    + '<td class="team stat crt"></td><td class="team stat heal"></td></tr></table></div></div></li>';
+	buf += '</table></div></div></li>'
 
 	// add the monstie to the team export text if it is not empty
 	if (monstObj.id >= 0) {
@@ -729,8 +820,7 @@ function teamView() {
     }
 
     // set the export text
-    buf += '</ol></section><section id="export">';
-    buf += '<span id="export-text">Import/export your team!</span>';
+    buf += '</ol></section><section id="export"><h2 id="export-header">Import/Export</h2>';
     buf += '<textarea id="export-text-area">';
     buf += exportText;
     buf += '</textarea>';
@@ -744,7 +834,7 @@ function teamView() {
     var $lis = $('#team-list').children();
     for (var i = 0; i < $lis.length; i++) {
 	var $li = $lis.eq(i);
-	updateMonstieHTML(TeamBuilder.team[i], $li.find('.monstie'));
+	updateMonstieHTML(TeamBuilder.team[i], $li.find('.monstie-icon'));
 	updateBingosHTML(TeamBuilder.team[i], $li.find('.bingo-list'));
 	updateStatsHTML(TeamBuilder.team[i], $li.find('.stats-table'));
     }
@@ -757,7 +847,11 @@ $(document).ready(function () {
     // set the event for deleting a monstie
     $('#viewer').on('click', '.delete-monstie', function(e) {
 	// get the current monstie being deleted
-	TeamBuilder.currentTeamIndex = $(e.currentTarget).parent().index();
+	var $currentTarget = $(e.currentTarget);
+	var inTeamView = $currentTarget.hasClass('team');
+	if (inTeamView) {
+	    TeamBuilder.currentTeamIndex = $currentTarget.parents().index();
+	}
 
 	// blank out the monstie
 	TeamBuilder.team[TeamBuilder.currentTeamIndex] = {
@@ -779,15 +873,19 @@ $(document).ready(function () {
 	    }
 	};
 
-	// reset the team view
-	teamView();
+	// reset the view
+	if (inTeamView) {
+	    teamView();
+	} else {
+	    builderView('builder monstie-search');
+	}
     });
 
     // set the event for importing a team
     $('#viewer').on('click', '#import-team', importTeam);
 
     // set the event for going back to the team view from the builder view
-    $('#viewer').on('click', '#team-button', teamView);
+    $('#viewer').on('click', '#back-button', teamView);
 
     // set the event for searching for a monstie
     $('#viewer').on('keyup', '.builder.monstie-search', function (e) {
@@ -856,7 +954,7 @@ $(document).ready(function () {
     // set the event for focusing on the team view monstie search box
     $('#viewer').on('focus', '.team.monstie-search', function (e) {
 	var currentTarget = $(e.currentTarget);
-	TeamBuilder.currentTeamIndex = currentTarget.parents().eq(2).index();
+	TeamBuilder.currentTeamIndex = currentTarget.parents().eq(4).index();
 	TeamBuilder.highlightedIndex = 0;
 	builderView(currentTarget.attr('class'));
 	filterMonsties(false);

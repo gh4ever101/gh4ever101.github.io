@@ -13,14 +13,13 @@ h1 {
     font-size: 2em;
     font-weight: bold;
     text-align: center;
+    text-shadow: -1px 0 #d0d0d0, 0 1px #d0d0d0, 1px 0 #d0d0d0, 0 -1px #d0d0d0;
 }
 
 h2 {
     color: #00acac;
-    font-weight: bold;
     font-size: 1.5em;
-    margin-top: 1em;
-    margin-bottom: 0em;
+    font-weight: bold;
 }
 
 footer {
@@ -33,501 +32,705 @@ footer {
     background-color: #f0f0f0;
     border: 1px solid #999;
     border-radius: 5px;
+    display: block;
+    height: 20em;
+    margin: 2em auto;
+    position: relative;
+    width: 95%;
+}
+
+#export-header {
+    position: absolute;
+    top: -1em;
+}
+
+#export-text-area {
+    display: block;
+    height: 90%;
+    font-family: monospace;
+    font-size: 0.75em;
+    margin: 0 auto;
+    resize: none;
+    text-align: center;
+    white-space: pre;
+    width: 90%;
+}
+
+#import-team {
+    display: block;
+    height: 10%;
+    margin: 0 auto;
+    width: 90%;
+}
+
+#team {
     margin-top: 2em;
+}
+
+#team-header {
+    position: absolute;
+    left: 0em;
+    top: -1em;
+}
+
+#team-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
 }
 
 #team-list li, #monstie-list li, #gene-list li, .bingo-list li {
     list-style-type: none;
-    margin-top: 0.5em;
+}
+
+#team-list > li {
+    margin-bottom: 1em;
+    position: relative;
+}
+
+#back-button {
+    position: absolute;
+}
+
+.delete-monstie {
+    border: 1px solid #900;
+    font-size: 0.75em;
+    position: absolute;
+    right: 1em;
+}
+
+#builder-view-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+#builder-header {
+    position: absolute;
+    left: 0em;
+    top: -1em;
 }
 
 .member-container {
     background-color: #f3f3f3;
     border: 1px solid #999;
     border-radius: 5px;
-    list-style-type: none;
-}
-
-.delete-button-container {
-    float: right;
-}
-
-.delete-monstie {
-    float: right;
-    font-size: 0.75em;
-}
-
-.team-monstie-container, .bingos-container, .stats-container {
-    box-shadow: 0em 0em 0.1em rgba(50, 50, 50, 0.5);
-    margin-right: 10%;
     display: inline-block;
+    padding: 1em;
+    position: relative;
+}
+
+.builder-container.top {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bingos-container {
+    margin-right: 1em;
+}
+
+.monstie-container {
+    display: block;
+    margin: 0 auto 1em;
+}
+
+.monstie-search {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 70%;
+}
+
+.stats-table {
+    align: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.stats-table th, .stats-table td {
+    padding: 0 1em;
+}
+
+.stats-table td {
+    padding-top: 0.1em;
+}
+
+.stat.modp {
+    color: #070;
+    font-weight: bold;
+}
+
+.stat.modn {
+    color: #700;
+    font-weight: bold;
 }
 
 .bingo-list {
     display: inline-block;
 }
 
+.bingo-list.right {
+    margin-right: 1.5em;
+}
+
+.bingo-list li {
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
 .bingo-list li .true {
     font-weight: bold;
 }
 
-.bingo-status {
-    margin-left: -2em;
-}
-
-#monstie-search {
-    width: 50%;
-}
-
-#export-text-area {
-    width: 80%;
-    height: 30em;
-    font-family: monospace;
-    font-size: 0.75em;
+.gene-search {
     text-align: center;
-    white-space: pre;
 }
 
 .data-list {
-    max-height: 30em;
+    max-height: 20em;
+    padding: 0;
     overflow-y: scroll;
 }
 
+.data-list button {
+    background-color: rgba(0, 0, 150, 0.05);
+    border: 1px solid #999;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 0;
+    width: 100%;
+}
+
 .highlighted {
-    background-color: #333;
+    box-shadow: 0 0 20px #999;
 }
 
-.monstie {
+.listed-img-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.data-list .power .type {
+    background-image: url(../img/power.png);
+    background-size: contain;
+    height: 1em;
+    width: 1em;
+}
+
+.data-list .speed .type {
+    background-image: url(../img/speed.png);
+    background-size: contain;
+    height: 1em;
+    width: 1em;
+}
+
+.data-list .technical .type {
+    background-image: url(../img/technical.png);
+    background-size: contain;
+    height: 1em;
+    width: 1em;
+}
+
+.data-list .dragon .element {
+    background-image: url(../img/dragon.png);
+    background-size: contain;
+    height: 1em;
+    width: 1em;
+}
+
+.data-list .fire .element {
+    background-image: url(../img/fire.png);
+    background-size: contain;
+    height: 1em;
+    width: 1em;
+}
+
+.data-list .ice .element {
+    background-image: url(../img/ice.png);
+    background-size: contain;
+    height: 1em;
+    width: 1em;
+}
+
+.data-list .thunder .element {
+    background-image: url(../img/thunder.png);
+    background-size: contain;
+    height: 1em;
+    width: 1em;
+}
+
+.data-list .water .element {
+    background-image: url(../img/water.png);
+    background-size: contain;
+    height: 1em;
+    width: 1em;
+}
+
+.monstie-element-icon {
+    background-size: contain;
+    bottom: 0;
+    left: 0;
+    height: 1em;
+    position: absolute;
+    width: 1em;
+}
+
+.monstie-element-icon.dragon {
+    background-image: url(../img/dragon.png);
+}
+
+.monstie-element-icon.fire {
+    background-image: url(../img/fire.png);
+}
+
+.monstie-element-icon.ice {
+    background-image: url(../img/ice.png);
+}
+
+.monstie-element-icon.thunder {
+    background-image: url(../img/thunder.png);
+}
+
+.monstie-element-icon.water {
+    background-image: url(../img/water.png);
+}
+
+.monstie-icon {
     background-image: url(../img/icons.png);
+    display: block;
+    margin: 0 auto;
+    position: relative;
 }
 
-.monstie.empty {
+.monstie-icon.empty {
     background-image: url(../img/question_mark.png);
     width: 72px;
     height: 72px;
 }
 
-.monstie.aptonoth {
+.monstie-icon.aptonoth {
     width: 72px;
     height: 72px;
     background-position: -1px -1px;
 }
 
-.monstie.velocidrome {
+.monstie-icon.velocidrome {
     width: 72px;
     height: 72px;
     background-position: -75px -1px;
 }
 
-.monstie.arzuros {
+.monstie-icon.arzuros {
     width: 72px;
     height: 72px;
     background-position: -149px -1px;
 }
 
-.monstie.yian_kut_ku {
+.monstie-icon.yian_kut_ku {
     width: 72px;
     height: 72px;
     background-position: -223px -1px;
 }
 
-.monstie.blue_yian_kut_ku {
+.monstie-icon.blue_yian_kut_ku {
     width: 72px;
     height: 72px;
     background-position: -297px -1px;
 }
 
-.monstie.popo {
+.monstie-icon.popo {
     width: 72px;
     height: 72px;
     background-position: -371px -1px;
 }
 
-.monstie.lagombi {
+.monstie-icon.lagombi {
     width: 72px;
     height: 72px;
     background-position: -445px -1px;
 }
 
-.monstie.bulldrome {
+.monstie-icon.bulldrome {
     width: 72px;
     height: 72px;
     background-position: -519px -1px;
 }
 
-.monstie.zamtrios {
+.monstie-icon.zamtrios {
     width: 72px;
     height: 72px;
     background-position: -1px -75px;
 }
 
-.monstie.khezu {
+.monstie-icon.khezu {
     width: 72px;
     height: 72px;
     background-position: -75px -75px;
 }
 
-.monstie.red_khezu {
+.monstie-icon.red_khezu {
     width: 72px;
     height: 72px;
     background-position: -149px -75px;
 }
 
-.monstie.apceros {
+.monstie-icon.apceros {
     width: 72px;
     height: 72px;
     background-position: -223px -75px;
 }
 
-.monstie.gendrome {
+.monstie-icon.gendrome {
     width: 72px;
     height: 72px;
     background-position: -297px -75px;
 }
 
-.monstie.royal_ludroth {
+.monstie-icon.royal_ludroth {
     width: 72px;
     height: 72px;
     background-position: -371px -75px;
 }
 
-.monstie.gypceros {
+.monstie-icon.gypceros {
     width: 72px;
     height: 72px;
     background-position: -445px -75px;
 }
 
-.monstie.nerscylla {
+.monstie-icon.nerscylla {
     width: 72px;
     height: 72px;
     background-position: -519px -75px;
 }
 
-.monstie.shrouded_nerscylla {
+.monstie-icon.shrouded_nerscylla {
     width: 72px;
     height: 72px;
     background-position: -1px -149px;
 }
 
-.monstie.qurupeco {
+.monstie-icon.qurupeco {
     width: 72px;
     height: 72px;
     background-position: -75px -149px;
 }
 
-.monstie.rathian {
+.monstie-icon.rathian {
     width: 72px;
     height: 72px;
     background-position: -149px -149px;
 }
 
-.monstie.pink_rathian {
+.monstie-icon.pink_rathian {
     width: 72px;
     height: 72px;
     background-position: -223px -149px;
 }
 
-.monstie.barroth {
+.monstie-icon.barroth {
     width: 72px;
     height: 72px;
     background-position: -297px -149px;
 }
 
-.monstie.cephadrome {
+.monstie-icon.cephadrome {
     width: 72px;
     height: 72px;
     background-position: -371px -149px;
 }
 
-.monstie.diablos {
+.monstie-icon.diablos {
     width: 72px;
     height: 72px;
     background-position: -445px -149px;
 }
 
-.monstie.black_diablos {
+.monstie-icon.black_diablos {
     width: 72px;
     height: 72px;
     background-position: -519px -149px;
 }
 
-.monstie.tigrex {
+.monstie-icon.tigrex {
     width: 72px;
     height: 72px;
     background-position: -1px -223px;
 }
 
-.monstie.iodrome {
+.monstie-icon.iodrome {
     width: 72px;
     height: 72px;
     background-position: -75px -223px;
 }
 
-.monstie.basarios {
+.monstie-icon.basarios {
     width: 72px;
     height: 72px;
     background-position: -149px -223px;
 }
 
-.monstie.gravios {
+.monstie-icon.gravios {
     width: 72px;
     height: 72px;
     background-position: -223px -223px;
 }
 
-.monstie.uragaan {
+.monstie-icon.uragaan {
     width: 72px;
     height: 72px;
     background-position: -297px -223px;
 }
 
-.monstie.brute_tigrex {
+.monstie-icon.brute_tigrex {
     width: 72px;
     height: 72px;
     background-position: -371px -223px;
 }
 
-.monstie.great_jaggi {
+.monstie-icon.great_jaggi {
     width: 72px;
     height: 72px;
     background-position: -445px -223px;
 }
 
-.monstie.kecha_wacha {
+.monstie-icon.kecha_wacha {
     width: 72px;
     height: 72px;
     background-position: -519px -223px;
 }
 
-.monstie.purple_ludroth {
+.monstie-icon.purple_ludroth {
     width: 72px;
     height: 72px;
     background-position: -1px -297px;
 }
 
-.monstie.yian_garuga {
+.monstie-icon.yian_garuga {
     width: 72px;
     height: 72px;
     background-position: -75px -297px;
 }
 
-.monstie.congalala {
+.monstie-icon.congalala {
     width: 72px;
     height: 72px;
     background-position: -149px -297px;
 }
 
-.monstie.emerald_congalala {
+.monstie-icon.emerald_congalala {
     width: 72px;
     height: 72px;
     background-position: -223px -297px;
 }
 
-.monstie.crimson_qurupeco {
+.monstie-icon.crimson_qurupeco {
     width: 72px;
     height: 72px;
     background-position: -297px -297px;
 }
 
-.monstie.black_gravios {
+.monstie-icon.black_gravios {
     width: 72px;
     height: 72px;
     background-position: -371px -297px;
 }
 
-.monstie.zinogre {
+.monstie-icon.zinogre {
     width: 72px;
     height: 72px;
     background-position: -445px -297px;
 }
 
-.monstie.ruby_basarios {
+.monstie-icon.ruby_basarios {
     width: 72px;
     height: 72px;
     background-position: -519px -297px;
 }
 
-.monstie.nargacuga {
+.monstie-icon.nargacuga {
     width: 72px;
     height: 72px;
     background-position: -1px -371px;
 }
 
-.monstie.green_nargacuga {
+.monstie-icon.green_nargacuga {
     width: 72px;
     height: 72px;
     background-position: -75px -371px;
 }
 
-.monstie.rathalos {
+.monstie-icon.rathalos {
     width: 72px;
     height: 72px;
     background-position: -149px -371px;
 }
 
-.monstie.azure_rathalos {
+.monstie-icon.azure_rathalos {
     width: 72px;
     height: 72px;
     background-position: -223px -371px;
 }
 
-.monstie.purple_gypceros {
+.monstie-icon.purple_gypceros {
     width: 72px;
     height: 72px;
     background-position: -297px -371px;
 }
 
-.monstie.ash_kecha_wacha {
+.monstie-icon.ash_kecha_wacha {
     width: 72px;
     height: 72px;
     background-position: -371px -371px;
 }
 
-.monstie.lagiacrus {
+.monstie-icon.lagiacrus {
     width: 72px;
     height: 72px;
     background-position: -445px -371px;
 }
 
-.monstie.ivory_lagiacrus {
+.monstie-icon.ivory_lagiacrus {
     width: 72px;
     height: 72px;
     background-position: -519px -371px;
 }
 
-.monstie.deviljho {
+.monstie-icon.deviljho {
     width: 72px;
     height: 72px;
     background-position: -1px -445px;
 }
 
-.monstie.great_baggi {
+.monstie-icon.great_baggi {
     width: 72px;
     height: 72px;
     background-position: -75px -445px;
 }
 
-.monstie.jade_barroth {
+.monstie-icon.jade_barroth {
     width: 72px;
     height: 72px;
     background-position: -149px -445px;
 }
 
-.monstie.barioth {
+.monstie-icon.barioth {
     width: 72px;
     height: 72px;
     background-position: -223px -445px;
 }
 
-.monstie.sand_barioth {
+.monstie-icon.sand_barioth {
     width: 72px;
     height: 72px;
     background-position: -297px -445px;
 }
 
-.monstie.stygian_zinogre {
+.monstie-icon.stygian_zinogre {
     width: 72px;
     height: 72px;
     background-position: -371px -445px;
 }
 
-.monstie.brachydios {
+.monstie-icon.brachydios {
     width: 72px;
     height: 72px;
     background-position: -445px -445px;
 }
 
-.monstie.rajang {
+.monstie-icon.rajang {
     width: 72px;
     height: 72px;
     background-position: -519px -445px;
 }
 
-.monstie.kirin {
+.monstie-icon.kirin {
     width: 72px;
     height: 72px;
     background-position: -1px -519px;
 }
 
-.monstie.monoblos {
+.monstie-icon.monoblos {
     width: 72px;
     height: 72px;
     background-position: -75px -519px;
 }
 
-.monstie.seregios {
+.monstie-icon.seregios {
     width: 72px;
     height: 72px;
     background-position: -149px -519px;
 }
 
-.monstie.gold_rathian {
+.monstie-icon.gold_rathian {
     width: 72px;
     height: 72px;
     background-position: -223px -519px;
 }
 
-.monstie.silver_rathalos {
+.monstie-icon.silver_rathalos {
     width: 72px;
     height: 72px;
     background-position: -297px -519px;
 }
 
-.monstie.kushala_daora {
+.monstie-icon.kushala_daora {
     width: 72px;
     height: 72px;
     background-position: -371px -519px;
 }
 
-.monstie.teostra {
+.monstie-icon.teostra {
     width: 72px;
     height: 72px;
     background-position: -445px -519px;
 }
 
-.monstie.great_poogie {
+.monstie-icon.great_poogie {
     width: 72px;
     height: 72px;
     background-position: -519px -519px;
 }
 
-.monstie.white_monoblos {
+.monstie-icon.white_monoblos {
     width: 72px;
     height: 72px;
     background-position: -593px -1px;
 }
 
-.monstie.molten_tigrex {
+.monstie-icon.molten_tigrex {
     width: 72px;
     height: 72px;
     background-position: -593px -75px;
 }
 
-.monstie.oroshi_kirin {
+.monstie-icon.oroshi_kirin {
     width: 72px;
     height: 72px;
     background-position: -593px -149px;
 }
 
-.monstie.glavenus {
+.monstie-icon.glavenus {
     width: 72px;
     height: 72px;
     background-position: -593px -223px;
 }
 
-.monstie.kumashira {
+.monstie-icon.kumashira {
     width: 72px;
     height: 72px;
     background-position: -593px -297px;
 }
 
-.monstie.epona {
+.monstie-icon.epona {
     width: 72px;
     height: 72px;
     background-position: -593px -371px;
 }
 
-.monstie.kurenai_goukami {
+.monstie-icon.kurenai_goukami {
     width: 72px;
     height: 72px;
     background-position: -593px -445px;
