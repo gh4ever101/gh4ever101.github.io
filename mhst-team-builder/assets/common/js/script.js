@@ -954,10 +954,10 @@ $(document).ready(function () {
 
     // set the event for focusing on the team view monstie search box
     $('#viewer').on('focus', '.team.monstie-search', function (e) {
-	var currentTarget = $(e.currentTarget);
-	TeamBuilder.currentTeamIndex = currentTarget.parents().eq(4).index();
+	var $currentTarget = $(e.currentTarget);
+	TeamBuilder.currentTeamIndex = $currentTarget.parents().eq(4).index();
 	TeamBuilder.highlightedIndex = 0;
-	builderView(currentTarget.attr('class'));
+	builderView($currentTarget.attr('class'));
 	filterMonsties(false);
     });
 
@@ -968,12 +968,12 @@ $(document).ready(function () {
 	filterMonsties(false);
     });
 
-    // set the event for focusing on a gene search box
+    // set the event for focusing on a team view gene search box
     $('#viewer').on('focus', '.team.gene-search', function (e) {
-	var currentTarget = $(e.currentTarget);
-	var currentTargetClass = currentTarget.attr('class');
+	var $currentTarget = $(e.currentTarget);
+	var currentTargetClass = $currentTarget.attr('class');
 	TeamBuilder.highlightedIndex = 0;
-	TeamBuilder.currentTeamIndex = currentTarget.parents().eq(6).index();
+	TeamBuilder.currentTeamIndex = $currentTarget.parents().eq(6).index();
 	var geneIndex = currentTargetClass.split(' ')[2];
 	builderView(currentTargetClass);
 	TeamBuilder.$currentBingoSlot = $('.gene-search.'+geneIndex);
@@ -981,12 +981,25 @@ $(document).ready(function () {
 	filterGenes(false);
     });
 
-    // set the event for focusing on a gene search box
+    // set the event for focusing on a builder view gene search box
     $('#viewer').on('focus', '.builder.gene-search', function (e) {
 	TeamBuilder.highlightedIndex = 0;
 	TeamBuilder.$currentBingoSlot = $(e.currentTarget);
 	TeamBuilder.$currentBingoSlot.select();
 	filterGenes(false);
+    });
+
+    // set the event for leaving focus on the builder view monstie search box
+    $('#viewer').on('focusout', '.builder.monstie-search', function (e) {
+	$(e.currentTarget).val(Monsties[TeamBuilder.team[TeamBuilder.currentTeamIndex].monstie].name);
+    });
+
+    // set the event for leaving focus on a builder view gene search box
+    $('#viewer').on('focusout', '.builder.gene-search', function (e) {
+	var $currentTarget = $(e.currentTarget);
+	var geneKey = TeamBuilder.team[TeamBuilder.currentTeamIndex].genes[
+	    $currentTarget.attr('class').split(' ')[2]];
+	$currentTarget.val(Genes[geneKey].name);
     });
 
     // set the event for adding a monstie

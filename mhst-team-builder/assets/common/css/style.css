@@ -213,60 +213,49 @@ footer {
     justify-content: space-around;
 }
 
+.listed-cont {
+    height: 1em;
+    width: 1em;
+}
+
 .data-list .power .type {
     background-image: url(../img/power.png);
     background-size: contain;
-    height: 1em;
-    width: 1em;
 }
 
 .data-list .speed .type {
     background-image: url(../img/speed.png);
     background-size: contain;
-    height: 1em;
-    width: 1em;
 }
 
 .data-list .technical .type {
     background-image: url(../img/technical.png);
     background-size: contain;
-    height: 1em;
-    width: 1em;
 }
 
 .data-list .dragon .element {
     background-image: url(../img/dragon.png);
     background-size: contain;
-    height: 1em;
-    width: 1em;
 }
 
 .data-list .fire .element {
     background-image: url(../img/fire.png);
     background-size: contain;
-    height: 1em;
-    width: 1em;
 }
 
 .data-list .ice .element {
     background-image: url(../img/ice.png);
     background-size: contain;
-    height: 1em;
-    width: 1em;
 }
 
 .data-list .thunder .element {
     background-image: url(../img/thunder.png);
     background-size: contain;
-    height: 1em;
-    width: 1em;
 }
 
 .data-list .water .element {
     background-image: url(../img/water.png);
     background-size: contain;
-    height: 1em;
-    width: 1em;
 }
 
 .monstie-element-icon {
