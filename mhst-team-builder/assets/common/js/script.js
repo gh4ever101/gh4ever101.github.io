@@ -501,6 +501,8 @@ function updateStatsHTML(teamMember, $statsHTML) {
     $atk.removeClass('modn');
     $def.removeClass('modp');
     $def.removeClass('modn');
+    $spd.removeClass('modp');
+    $spd.removeClass('modn');
     $crt.removeClass('modp');
     $crt.removeClass('modn');
     $heal.removeClass('modp');
@@ -574,6 +576,7 @@ function updateStatsHTML(teamMember, $statsHTML) {
     }
     if (teamMember.bingos['nelem'] === '1') {
 	baseStats['spd']++;
+	$spd.addClass('modp');
     }
 
     // set the element text to be the correct stat
@@ -677,7 +680,7 @@ function updateStatsHTML(teamMember, $statsHTML) {
     if (baseStats['crt'] > 0) {
 	$crt.addClass('modp');
     } else if (baseStats['crt'] < 0) {
-	$hp.addClass('crt');
+	$crt.addClass('modn');
     }
     if (baseStats['heal'] > 0) {
 	$heal.addClass('modp');
