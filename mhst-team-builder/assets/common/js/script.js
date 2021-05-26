@@ -420,33 +420,53 @@ function updateBingos(teamMember) {
 function updateBingosHTML(teamMember, $bingosHTML) {
     if (teamMember.bingos['dragon'] === '1') {
 	$bingosHTML.find('.bingo-status.dragon').addClass('true');
+    } else {
+	$bingosHTML.find('.bingo-status.dragon').removeClass('true');
     }
     if (teamMember.bingos['fire'] === '1') {
 	$bingosHTML.find('.bingo-status.fire').addClass('true');
+    } else {
+	$bingosHTML.find('.bingo-status.fire').removeClass('true');
     }
     if (teamMember.bingos['ice'] === '1') {
 	$bingosHTML.find('.bingo-status.ice').addClass('true');
+    } else {
+	$bingosHTML.find('.bingo-status.ice').removeClass('true');
     }
     if (teamMember.bingos['thunder'] === '1') {
 	$bingosHTML.find('.bingo-status.thunder').addClass('true');
+    } else {
+	$bingosHTML.find('.bingo-status.thunder').removeClass('true');
     }
     if (teamMember.bingos['water'] === '1') {
 	$bingosHTML.find('.bingo-status.water').addClass('true');
+    } else {
+	$bingosHTML.find('.bingo-status.water').removeClass('true');
     }
     if (teamMember.bingos['power'] === '1') {
 	$bingosHTML.find('.bingo-status.power').addClass('true');
+    } else {
+	$bingosHTML.find('.bingo-status.power').removeClass('true');
     }
     if (teamMember.bingos['speed'] === '1') {
 	$bingosHTML.find('.bingo-status.speed').addClass('true');
+    } else {
+	$bingosHTML.find('.bingo-status.speed').removeClass('true');
     }
     if (teamMember.bingos['technical'] === '1') {
 	$bingosHTML.find('.bingo-status.technical').addClass('true');
+    } else {
+	$bingosHTML.find('.bingo-status.technical').removeClass('true');
     }
     if (teamMember.bingos['any'] === '1') {
 	$bingosHTML.find('.bingo-status.any').addClass('true');
+    } else {
+	$bingosHTML.find('.bingo-status.any').removeClass('true');
     }
     if (teamMember.bingos['nelem'] === '1') {
 	$bingosHTML.find('.bingo-status.nelem').addClass('true');
+    } else {
+	$bingosHTML.find('.bingo-status.nelem').removeClass('true');
     }
 }
 
