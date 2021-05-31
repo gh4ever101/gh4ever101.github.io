@@ -816,8 +816,9 @@ function builderView(currentTargetClass) {
     buf += '<div class="builder member-container" title="' + monstObj.name + '">';
     buf += '<h2 id="builder-header">Edit</h2>'
 
-    // set the back and clear buttons
+    // set the back, share, and clear buttons
     buf += '<button type="button" class="btn btn-secondary builder" role="button" id="back-button">Back</button>';
+    buf += '<button type="button" class="btn btn-primary btn-sm team share-monstie" role="button">Copy to Clipboard!</button>';
     buf += '<button type="button" class="btn btn-danger btn-sm builder delete-monstie" role="button">Clear</button>';
 
     // set the monstie icon
@@ -924,7 +925,7 @@ function teamView() {
 	}
 
 	// set the share and clear buttons
-	buf += '<button type="button" class="btn btn-primary btn-sm team share-monstie" role="button">Share</button>';
+	buf += '<button type="button" class="btn btn-primary btn-sm team share-monstie" role="button">Copy to Clipboard!</button>';
 	buf += '<button type="button" class="btn btn-danger btn-sm team delete-monstie" role="button">Clear</button>';
 
 	// set the monstie icon
@@ -1042,7 +1043,6 @@ $(document).ready(function () {
     // set the event for sharing a monstie
     $('#viewer').on('click', '.share-monstie', function(e) {
 	// save the image to the clipboard
-	
 	html2canvas(e.currentTarget.parentNode).then(function(canvas) {
 	    canvas.toBlob(function(blob) {
 		navigator.clipboard.write([
@@ -1050,6 +1050,7 @@ $(document).ready(function () {
 			'image/png': blob
 		    })
 		]);
+		$('.share-monstie-alert').fadeOut(3000);
 	    });
 	});
     });
