@@ -1044,11 +1044,13 @@ $(document).ready(function () {
 	// save the image to the clipboard
 	
 	html2canvas(e.currentTarget.parentNode).then(function(canvas) {
-	    navigator.clipboard.write([
-		new ClipboardItem({
-		    'image/png': canvas.toBlob(function() {}, 'image/png')
-		})
-	    ]);
+	    canvas.toBlob(function(blob) {
+		navigator.clipboard.write([
+		    new ClipboardItem({
+			'image/png': blob
+		    })
+		]);
+	    });
 	});
     });
 
