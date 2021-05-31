@@ -1050,7 +1050,6 @@ $(document).ready(function () {
 			'image/png': blob
 		    })
 		]);
-		$('.share-monstie-alert').fadeOut(3000);
 	    });
 	});
     });

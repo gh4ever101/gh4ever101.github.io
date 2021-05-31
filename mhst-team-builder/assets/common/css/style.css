@@ -100,13 +100,6 @@ footer {
     position: absolute;
 }
 
-.share-monstie-alert {
-    display: none;
-    font-size: 0.9em;
-    padding: 0.1em;
-    text-align: center;
-}
-
 .delete-monstie {
     border: 1px solid #900;
     font-size: 0.75em;
