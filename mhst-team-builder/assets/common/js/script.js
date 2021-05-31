@@ -818,7 +818,7 @@ function builderView(currentTargetClass) {
 
     // set the back, share, and clear buttons
     buf += '<button type="button" class="btn btn-secondary builder" role="button" id="back-button">Back</button>';
-    buf += '<button type="button" class="btn btn-primary btn-sm team share-monstie" role="button">Copy to Clipboard!</button>';
+    buf += '<button type="button" class="btn btn-primary btn-sm builder share-monstie" role="button">Copy to Clipboard!</button>';
     buf += '<button type="button" class="btn btn-danger btn-sm builder delete-monstie" role="button">Clear</button>';
 
     // set the monstie icon
