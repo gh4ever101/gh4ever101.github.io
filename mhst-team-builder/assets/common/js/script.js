@@ -923,7 +923,8 @@ function teamView() {
 	    buf += '<h2 id="team-header">Your Team</h2>'
 	}
 
-	// set the clear button
+	// set the share and clear buttons
+	buf += '<button type="button" class="btn btn-primary btn-sm team share-monstie" role="button">Share</button>';
 	buf += '<button type="button" class="btn btn-danger btn-sm team delete-monstie" role="button">Clear</button>';
 
 	// set the monstie icon
@@ -1038,6 +1039,19 @@ function teamView() {
 }
 
 $(document).ready(function () {
+    // set the event for sharing a monstie
+    $('#viewer').on('click', '.share-monstie', function(e) {
+	// save the image to the clipboard
+	html2canvas(e.currentTarget.parentNode).then(function(canvas) {
+	    navigator.clipboard.write([
+		new ClipboardItem({
+		    'image/png': canvas.toBlob(function(){})
+		})
+	    ]);
+	    navigator.clipboard.writeText("test");
+	});
+    });
+
     // set the event for deleting a monstie
     $('#viewer').on('click', '.delete-monstie', function(e) {
 	// get the current monstie being deleted
