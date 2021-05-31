@@ -1042,11 +1042,12 @@ $(document).ready(function () {
     // set the event for sharing a monstie
     $('#viewer').on('click', '.share-monstie', function(e) {
 	// save the image to the clipboard
-	html2canvas(e.currentTarget.parentNode).toBlob(function(blob) {
-	    console.log(blob.type);
+	
+	html2canvas(e.currentTarget.parentNode).then(function(canvas) {
+	    console.log(canvas.toBlob(function() {}).type);
 	    navigator.clipboard.write([
 		new ClipboardItem({
-		    'image/png': blob
+		    'image/png': canvas.toBlob(function() {})
 		})
 	    ]);
 	});
