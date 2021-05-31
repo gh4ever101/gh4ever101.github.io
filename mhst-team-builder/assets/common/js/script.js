@@ -1043,6 +1043,7 @@ $(document).ready(function () {
     $('#viewer').on('click', '.share-monstie', function(e) {
 	// save the image to the clipboard
 	html2canvas(e.currentTarget.parentNode).toBlob(function(blob) {
+	    console.log(blob.type);
 	    navigator.clipboard.write([
 		new ClipboardItem({
 		    'image/png': blob
