@@ -1045,7 +1045,6 @@ $(document).ready(function () {
 	
 	html2canvas(e.currentTarget.parentNode).then(function(canvas) {
 	    console.log(canvas);
-	    console.log(canvas.toBlob(function() {}).type);
 	    navigator.clipboard.write([
 		new ClipboardItem({
 		    'image/png': canvas.toBlob(function() {})
