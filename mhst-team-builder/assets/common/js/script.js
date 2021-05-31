@@ -1044,6 +1044,7 @@ $(document).ready(function () {
 	// save the image to the clipboard
 	
 	html2canvas(e.currentTarget.parentNode).then(function(canvas) {
+	    console.log(canvas);
 	    console.log(canvas.toBlob(function() {}).type);
 	    navigator.clipboard.write([
 		new ClipboardItem({
