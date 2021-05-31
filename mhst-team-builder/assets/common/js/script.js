@@ -1044,11 +1044,9 @@ $(document).ready(function () {
 	// save the image to the clipboard
 	
 	html2canvas(e.currentTarget.parentNode).then(function(canvas) {
-	    var blob = canvas.toBlob(function() {}, 'image/png');
-	    console.log(blob.type);
 	    navigator.clipboard.write([
 		new ClipboardItem({
-		    'image/png': blob
+		    'image/png': canvas.toBlob(function() {}, 'image/png')
 		})
 	    ]);
 	});
