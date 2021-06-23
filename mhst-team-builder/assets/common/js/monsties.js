@@ -1986,18 +1986,18 @@ const Monsties = {
 	    spd: '0'
 	},
 	eAttk: {
-	    dragon: '3',
-	    fire: '5',
-	    ice: '3',
-	    thunder: '3',
-	    water: '1'
+	    dragon: '0',
+	    fire: '6',
+	    ice: '0',
+	    thunder: '0',
+	    water: '-3'
 	},
 	eRes: {
-	    dragon: '3',
-	    fire: '5',
-	    ice: '3',
-	    thunder: '3',
-	    water: '1'
+	    dragon: '0',
+	    fire: '4',
+	    ice: '0',
+	    thunder: '0',
+	    water: '-4'
 	}
     },
     kumashira: {
