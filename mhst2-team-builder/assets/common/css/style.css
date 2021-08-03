@@ -373,8 +373,8 @@ footer {
 
 .monstie-icon.empty {
     background-image: url(../img/question_mark.png);
-    width: 72px;
-    height: 72px;
+    width: 100px;
+    height: 100px;
 }
 
 .monstie-icon.congalala {

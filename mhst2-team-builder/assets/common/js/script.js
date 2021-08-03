@@ -627,82 +627,82 @@ function updateStatsHTML(teamMember, $statsHTML) {
 
     // set the element text to be the correct stat
     if (baseStats['hp'] == 0) {
-	$hp.html('-');
+	$hp.html('-----');
     } else {
 	$hp.html(baseStats['hp']);
     }
     if (baseStats['atk'] == 0) {
-	$atk.html('-');
+	$atk.html('-----');
     } else {
 	$atk.html(baseStats['atk']);
     }
     if (baseStats['def'] == 0) {
-	$def.html('-');
+	$def.html('-----');
     } else {
 	$def.html(baseStats['def']);
     }
     if (baseStats['spd'] == 0) {
-	$spd.html('-');
+	$spd.html('-----');
     } else {
 	$spd.html(baseStats['spd']);
     }
     if (baseStats['crt'] == 0) {
-	$crt.html('-');
+	$crt.html('-----');
     } else {
 	$crt.html(baseStats['crt']);
     }
     if (baseStats['heal'] == 0) {
-	$heal.html('-');
+	$heal.html('-----');
     } else {
 	$heal.html(baseStats['heal']);
     }
     if (baseStats['dragonAtk'] == 0) {
-	$dragonAtk.html('-');
+	$dragonAtk.html('-----');
     } else {
 	$dragonAtk.html(baseStats['dragonAtk']);
     }
     if (baseStats['fireAtk'] == 0) {
-	$fireAtk.html('-');
+	$fireAtk.html('-----');
     } else {
 	$fireAtk.html(baseStats['fireAtk']);
     }
     if (baseStats['iceAtk'] == 0) {
-	$iceAtk.html('-');
+	$iceAtk.html('-----');
     } else {
 	$iceAtk.html(baseStats['iceAtk']);
     }
     if (baseStats['thunderAtk'] == 0) {
-	$thunderAtk.html('-');
+	$thunderAtk.html('-----');
     } else {
 	$thunderAtk.html(baseStats['thunderAtk']);
     }
     if (baseStats['waterAtk'] == 0) {
-	$waterAtk.html('-');
+	$waterAtk.html('-----');
     } else {
 	$waterAtk.html(baseStats['waterAtk']);
     }
     if (baseStats['dragonRes'] == 0) {
-	$dragonRes.html('-');
+	$dragonRes.html('-----');
     } else {
 	$dragonRes.html(baseStats['dragonRes']);
     }
     if (baseStats['fireRes'] == 0) {
-	$fireRes.html('-');
+	$fireRes.html('-----');
     } else {
 	$fireRes.html(baseStats['fireRes']);
     }
     if (baseStats['iceRes'] == 0) {
-	$iceRes.html('-');
+	$iceRes.html('-----');
     } else {
 	$iceRes.html(baseStats['iceRes']);
     }
     if (baseStats['thunderRes'] == 0) {
-	$thunderRes.html('-');
+	$thunderRes.html('-----');
     } else {
 	$thunderRes.html(baseStats['thunderRes']);
     }
     if (baseStats['waterRes'] == 0) {
-	$waterRes.html('-');
+	$waterRes.html('-----');
     } else {
 	$waterRes.html(baseStats['waterRes']);
     }
