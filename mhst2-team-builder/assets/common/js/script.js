@@ -328,12 +328,36 @@ function updateMonstieHTML(teamMember, $monstieHTML) {
     }
 
     // calculate elemental attack modifiers from bingos
-    baseEAttks['atk'] += Math.floor(0.1*teamMember.bingos.nelem*baseEAttks['atk']);
-    baseEAttks['dragon'] += Math.floor(0.1*teamMember.bingos.dragon*baseEAttks['dragon']);
-    baseEAttks['fire'] += Math.floor(0.1*teamMember.bingos.fire*baseEAttks['fire']);
-    baseEAttks['ice'] += Math.floor(0.1*teamMember.bingos.ice*baseEAttks['ice']);
-    baseEAttks['thunder'] += Math.floor(0.1*teamMember.bingos.thunder*baseEAttks['thunder']);
-    baseEAttks['water'] += Math.floor(0.1*teamMember.bingos.water*baseEAttks['water']);
+    if (teamMember.bingos.nelem < 2) {
+	baseEAttks['atk'] += Math.floor(0.1*teamMember.bingos.nelem*baseEAttks['atk']);
+    } else {
+	baseEAttks['atk'] += Math.floor(0.2*baseEAttks['atk']+0.05*(teamMember.bingos.nelem-2)*baseEAttks['atk']);
+    }
+    if (teamMember.bingos.dragon < 2) {
+	baseEAttks['dragon'] += Math.floor(0.1*teamMember.bingos.dragon*baseEAttks['dragon']);
+    } else {
+	baseEAttks['dragon'] += Math.floor(0.2*baseEAttks['dragon']+0.05*(teamMember.bingos.dragon-2)*baseEAttks['dragon']);
+    }
+    if (teamMember.bingos.fire < 2) {
+	baseEAttks['fire'] += Math.floor(0.1*teamMember.bingos.fire*baseEAttks['fire']);
+    } else {
+	baseEAttks['fire'] += Math.floor(0.2*baseEAttks['fire']+0.05*(teamMember.bingos.fire-2)*baseEAttks['fire']);
+    }
+    if (teamMember.bingos.ice < 2) {
+	baseEAttks['ice'] += Math.floor(0.1*teamMember.bingos.ice*baseEAttks['ice']);
+    } else {
+	baseEAttks['ice'] += Math.floor(0.2*baseEAttks['ice']+0.05*(teamMember.bingos.ice-2)*baseEAttks['ice']);
+    }
+    if (teamMember.bingos.thunder < 2) {
+	baseEAttks['thunder'] += Math.floor(0.1*teamMember.bingos.thunder*baseEAttks['thunder']);
+    } else {
+	baseEAttks['thunder'] += Math.floor(0.2*baseEAttks['thunder']+0.05*(teamMember.bingos.thunder-2)*baseEAttks['thunder']);
+    }
+    if (teamMember.bingos.water < 2) {
+	baseEAttks['water'] += Math.floor(0.1*teamMember.bingos.water*baseEAttks['water']);
+    } else {
+	baseEAttks['water'] += Math.floor(0.2*baseEAttks['water']+0.05*(teamMember.bingos.water-2)*baseEAttks['water']);
+    }
 
     // calculate the element of the monstie
     var aMax = 'atk';
@@ -558,34 +582,45 @@ function updateStatsHTML(teamMember, $statsHTML) {
 
     // calculate stat modifiers from bingos
     if (teamMember.bingos['dragon'] > 0) {
-	baseStats['dragonAtk'] *= 1 + 0.1 * teamMember.bingos['dragon'];
+	var firstBingos = teamMember.bingos['dragon'] > 2 ? 2 : teamMember.bingos['dragon'];
+	var extraBingos = teamMember.bingos['dragon'] > 2 ? teamMember.bingos['dragon'] - 2 : 0;
+	baseStats['dragonAtk'] *= 1 + 0.1 * firstBingos + 0.05 * extraBingos;
 	baseStats['dragonAtk'] = Math.floor(baseStats['dragonAtk']);
 	$dragonAtk.addClass('modp');
     }
     if (teamMember.bingos['fire'] > 0) {
-	console.log(baseStats['fireAtk']);
-	baseStats['fireAtk'] *= 1 + 0.1 * teamMember.bingos['fire'];
+	var firstBingos = teamMember.bingos['fire'] > 2 ? 2 : teamMember.bingos['fire'];
+	var extraBingos = teamMember.bingos['fire'] > 2 ? teamMember.bingos['fire'] - 2 : 0;
+	baseStats['fireAtk'] *= 1 + 0.1 * firstBingos + 0.05 * extraBingos;
 	baseStats['fireAtk'] = Math.floor(baseStats['fireAtk']);
 	console.log(baseStats['fireAtk']);
 	$fireAtk.addClass('modp');
     }
     if (teamMember.bingos['ice'] > 0) {
-	baseStats['iceAtk'] *= 1 + 0.1 * teamMember.bingos['ice'];
+	var firstBingos = teamMember.bingos['ice'] > 2 ? 2 : teamMember.bingos['ice'];
+	var extraBingos = teamMember.bingos['ice'] > 2 ? teamMember.bingos['ice'] - 2 : 0;
+	baseStats['iceAtk'] *= 1 + 0.1 * firstBingos + 0.05 * extraBingos;
 	baseStats['iceAtk'] = Math.floor(baseStats['iceAtk']);
 	$iceAtk.addClass('modp');
     }
     if (teamMember.bingos['thunder'] > 0) {
-	baseStats['thunderAtk'] *= 1 + 0.1 * teamMember.bingos['thunder'];
+	var firstBingos = teamMember.bingos['thunder'] > 2 ? 2 : teamMember.bingos['thunder'];
+	var extraBingos = teamMember.bingos['thunder'] > 2 ? teamMember.bingos['thunder'] - 2 : 0;
+	baseStats['thunderAtk'] *= 1 + 0.1 * firstBingos + 0.05 * extraBingos;
 	baseStats['thunderAtk'] = Math.floor(baseStats['thunderAtk']);
 	$thunderAtk.addClass('modp');
     }
     if (teamMember.bingos['water'] > 0) {
-	baseStats['waterAtk'] *= 1 + 0.1 * teamMember.bingos['water'];
+	var firstBingos = teamMember.bingos['water'] > 2 ? 2 : teamMember.bingos['water'];
+	var extraBingos = teamMember.bingos['water'] > 2 ? teamMember.bingos['water'] - 2 : 0;
+	baseStats['waterAtk'] *= 1 + 0.1 * firstBingos + 0.05 * extraBingos;
 	baseStats['waterAtk'] = Math.floor(baseStats['waterAtk']);
 	$waterAtk.addClass('modp');
     }
     if (teamMember.bingos['nelem'] > 0) {
-	baseStats['atk'] *= 1 + 0.1 * teamMember.bingos['nelem'];
+	var firstBingos = teamMember.bingos['nelem'] > 2 ? 2 : teamMember.bingos['nelem'];
+	var extraBingos = teamMember.bingos['nelem'] > 2 ? teamMember.bingos['nelem'] - 2 : 0;
+	baseStats['atk'] *= 1 + 0.1 * firstBingos + 0.05 * extraBingos;
 	baseStats['atk'] = Math.floor(baseStats['atk']);
 	$atk.addClass('modp');
     }
