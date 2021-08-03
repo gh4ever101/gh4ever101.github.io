@@ -32,7 +32,9 @@ function objToButton(obj) {
 	    + obj.element
 	    + '" title="' + obj.name  + '">';
 	buf += '<span>' + obj.name + '</span>';
-	buf += '<div class="listed-img-container g">';
+	buf += '<div class="listed-skill-container g">';
+	buf += '<span>' + obj.skill + '</span>';
+	buf += '</div><div class="listed-img-container g">';
 	buf += '<div class="listed-cont type"></div>';
 	buf += '<div class="listed-cont element"></div>';
 	buf += '</div></button></li>';

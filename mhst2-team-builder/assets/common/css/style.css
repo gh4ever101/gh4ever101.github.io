@@ -285,6 +285,11 @@ footer {
     box-shadow: 0 0 20px #999;
 }
 
+.listed-skill-container {
+    display: flex;
+    justify-content: space-around;
+}
+
 .listed-img-container {
     display: flex;
     justify-content: space-around;
@@ -293,6 +298,10 @@ footer {
 .listed-cont {
     height: 1em;
     width: 1em;
+}
+
+.listed-skill-container {
+    font-weight: normal;
 }
 
 .data-list .power .type {
