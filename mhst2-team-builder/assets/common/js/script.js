@@ -91,18 +91,17 @@ function importTeam() {
 			genes: ['empty', 'empty', 'empty',
 				'empty', 'empty', 'empty',
 				'empty', 'empty', 'empty'],
-			// TODO: should nelement be nelem?
 			bingos: {
-			    dragon: '0',
-			    fire: '0',
-			    ice: '0',
-			    thunder: '0',
-			    water: '0',
-			    power: '0',
-			    speed: '0',
-			    technical: '0',
-			    any: '0',
-			    nelement: '0'
+			    dragon: 0,
+			    fire: 0,
+			    ice: 0,
+			    thunder: 0,
+			    water: 0,
+			    power: 0,
+			    speed: 0,
+			    technical: 0,
+			    any: 0,
+			    nelem: 0
 			}
 		    });
 		}
@@ -132,16 +131,16 @@ function importTeam() {
 			'empty', 'empty', 'empty',
 			'empty', 'empty', 'empty'],
 		bingos: {
-		    dragon: '0',
-		    fire: '0',
-		    ice: '0',
-		    thunder: '0',
-		    water: '0',
-		    power: '0',
-		    speed: '0',
-		    technical: '0',
-		    any: '0',
-		    nelement: '0'
+		    dragon: 0,
+		    fire: 0,
+		    ice: 0,
+		    thunder: 0,
+		    water: 0,
+		    power: 0,
+		    speed: 0,
+		    technical: 0,
+		    any: 0,
+		    nelem: 0
 		}
 	    });
 	}
@@ -267,11 +266,13 @@ function filterGenes(filter = true) {
 	    var name = gene.name.toUpperCase();
 	    var type = gene.type.toUpperCase();
 	    var element = gene.element.toUpperCase();
+	    var skill = gene.skill.toUpperCase();
 	    for (var i = 0; i < search.length; i++) {
 		var keyword = search[i];
 		if (!(name.includes(keyword)
 		      || type.includes(keyword)
-		      || element.includes(keyword))) {
+		      || element.includes(keyword)
+		      || skill.includes(keyword))) {
 		    sat = false;
 		    break;
 		}
@@ -299,7 +300,9 @@ function filterGenes(filter = true) {
     }
 
     // set the highlighted gene assuming one was found
+    // TODO: replace '+' with 'p' in keys
     if (counter > 0) {
+	console.log(highlightedKey)
 	var $highlightedGene = $('#gene-list').find('.'+highlightedKey);
 	$highlightedGene[0].scrollIntoView({
 	    block: 'nearest'
@@ -316,6 +319,7 @@ function filterGenes(filter = true) {
 function updateMonstieHTML(teamMember, $monstieHTML) {
     // set the base elemental attack stats for the monstie
     var baseEAttks = {
+	atk: parseInt(Monsties[teamMember.monstie].stats.atk),
 	dragon: parseInt(Monsties[teamMember.monstie].eAttk.dragon),
 	fire: parseInt(Monsties[teamMember.monstie].eAttk.fire),
 	ice: parseInt(Monsties[teamMember.monstie].eAttk.ice),
@@ -323,17 +327,16 @@ function updateMonstieHTML(teamMember, $monstieHTML) {
 	water: parseInt(Monsties[teamMember.monstie].eAttk.water)
     }
 
-    // calculate elemental attack modifiers from genes
-    for (var i = 0; i < 9; i++) {
-	baseEAttks['dragon'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['dragon']);
-	baseEAttks['fire'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['fire']);
-	baseEAttks['ice'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['ice']);
-	baseEAttks['thunder'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['thunder']);
-	baseEAttks['water'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['water']);
-    }
+    // calculate elemental attack modifiers from bingos
+    baseEAttks['atk'] += Math.floor(0.1*teamMember.bingos.nelem*baseEAttks['atk']);
+    baseEAttks['dragon'] += Math.floor(0.1*teamMember.bingos.dragon*baseEAttks['dragon']);
+    baseEAttks['fire'] += Math.floor(0.1*teamMember.bingos.fire*baseEAttks['fire']);
+    baseEAttks['ice'] += Math.floor(0.1*teamMember.bingos.ice*baseEAttks['ice']);
+    baseEAttks['thunder'] += Math.floor(0.1*teamMember.bingos.thunder*baseEAttks['thunder']);
+    baseEAttks['water'] += Math.floor(0.1*teamMember.bingos.water*baseEAttks['water']);
 
     // calculate the element of the monstie
-    var aMax = 'dragon';
+    var aMax = 'atk';
     for (var element in baseEAttks) {
 	// TODO: fix bug in element when tied
 	aMax = baseEAttks[element] > baseEAttks[aMax] ? element : aMax;
@@ -341,9 +344,8 @@ function updateMonstieHTML(teamMember, $monstieHTML) {
 
     // set the element class to be the correct monstie in addition to its element
     $monstieHTML.attr('class', $monstieHTML.attr('class').split(' ')[0]+' monstie-icon '+teamMember.monstie);
-    if (baseEAttks[aMax] < 4) {
-	$monstieHTML.html('<div class="monstie-element-icon '
-			  +Monsties[teamMember.monstie].defaultEl+'"></div>');
+    if (aMax === 'atk') {
+	$monstieHTML.html('<div class="monstie-element-icon"></div>');
     } else {
 	$monstieHTML.html('<div class="monstie-element-icon '
 			  +aMax+'"></div>');
@@ -358,28 +360,28 @@ function updateMonstieHTML(teamMember, $monstieHTML) {
 function checkBingo(toCheck, bingos) {
     var keys = [toCheck[0].key, toCheck[1].key, toCheck[2].key];
     if (!keys.some(key => key==='empty')) {
-	bingos['any'] = '1';
+	bingos['any'] += 1;
 	var els = [toCheck[0].element, toCheck[1].element, toCheck[2].element];
-	if (els.every(key => key==='dragon')) {
-	    bingos['dragon'] = '1';
-	} else if (els.every(key => key==='fire')) {
-	    bingos['fire'] = '1';
-	} else if (els.every(key => key==='ice')) {
-	    bingos['ice'] = '1';
-	} else if (els.every(key => key==='thunder')) {
-	    bingos['thunder'] = '1';
-	} else if (els.every(key => key==='water')) {
-	    bingos['water'] = '1';
-	} else if (els.every(key => key==='')) {
-	    bingos['nelem'] = '1';
+	if (els.every(key => key==='dragon' || key==='all')) {
+	    bingos['dragon'] += 1;
+	} else if (els.every(key => key==='fire' || key==='all')) {
+	    bingos['fire'] += 1;
+	} else if (els.every(key => key==='ice' || key==='all')) {
+	    bingos['ice'] += 1;
+	} else if (els.every(key => key==='thunder' || key==='all')) {
+	    bingos['thunder'] += 1;
+	} else if (els.every(key => key==='water' || key==='all')) {
+	    bingos['water'] += 1;
+	} else if (els.every(key => key==='' || key==='all')) {
+	    bingos['nelem'] += 1;
 	}
 	var types = [toCheck[0].type, toCheck[1].type, toCheck[2].type];
-	if (types.every(key => key==='power')) {
-	    bingos['power'] = '1';
-	} else if (types.every(key => key==='speed')) {
-	    bingos['speed'] = '1';
-	} else if (types.every(key => key==='technical')) {
-	    bingos['technical'] = '1';
+	if (types.every(key => key==='power' || key==='all')) {
+	    bingos['power'] += 1;
+	} else if (types.every(key => key==='speed' || key==='all')) {
+	    bingos['speed'] += 1;
+	} else if (types.every(key => key==='technical' || key==='all')) {
+	    bingos['technical'] += 1;
 	}
     }
 }
@@ -393,7 +395,7 @@ function updateBingos(teamMember) {
     var genes = teamMember.genes;
     var bingos = teamMember.bingos;
     for (var bingo in bingos) {
-	bingos[bingo] = '0';
+	bingos[bingo] = 0;
     }
 
     // update the row bingos
@@ -419,56 +421,60 @@ function updateBingos(teamMember) {
  * @param {jQuery} $bingosHTML The document element to update.
  */
 function updateBingosHTML(teamMember, $bingosHTML) {
-    if (teamMember.bingos['dragon'] === '1') {
+    if (teamMember.bingos['dragon'] > 0) {
 	$bingosHTML.find('.bingo-status.dragon').addClass('true');
     } else {
 	$bingosHTML.find('.bingo-status.dragon').removeClass('true');
     }
-    if (teamMember.bingos['fire'] === '1') {
+    $bingosHTML.find('.bingo-status.dragon').text('Dragon Bingo x'+teamMember.bingos['dragon'])
+    if (teamMember.bingos['fire'] > 0) {
 	$bingosHTML.find('.bingo-status.fire').addClass('true');
     } else {
 	$bingosHTML.find('.bingo-status.fire').removeClass('true');
     }
-    if (teamMember.bingos['ice'] === '1') {
+    $bingosHTML.find('.bingo-status.fire').text('Fire Bingo x'+teamMember.bingos['fire'])
+    if (teamMember.bingos['ice'] > 0) {
 	$bingosHTML.find('.bingo-status.ice').addClass('true');
     } else {
 	$bingosHTML.find('.bingo-status.ice').removeClass('true');
     }
-    if (teamMember.bingos['thunder'] === '1') {
+    $bingosHTML.find('.bingo-status.ice').text('Ice Bingo x'+teamMember.bingos['ice'])
+    if (teamMember.bingos['thunder'] > 0) {
 	$bingosHTML.find('.bingo-status.thunder').addClass('true');
     } else {
 	$bingosHTML.find('.bingo-status.thunder').removeClass('true');
     }
-    if (teamMember.bingos['water'] === '1') {
+    $bingosHTML.find('.bingo-status.thunder').text('Thunder Bingo x'+teamMember.bingos['thunder'])
+    if (teamMember.bingos['water'] > 0) {
 	$bingosHTML.find('.bingo-status.water').addClass('true');
     } else {
 	$bingosHTML.find('.bingo-status.water').removeClass('true');
     }
-    if (teamMember.bingos['power'] === '1') {
+    $bingosHTML.find('.bingo-status.water').text('Water Bingo x'+teamMember.bingos['water'])
+    if (teamMember.bingos['power'] > 0) {
 	$bingosHTML.find('.bingo-status.power').addClass('true');
     } else {
 	$bingosHTML.find('.bingo-status.power').removeClass('true');
     }
-    if (teamMember.bingos['speed'] === '1') {
+    $bingosHTML.find('.bingo-status.power').text('Power Bingo x'+teamMember.bingos['power'])
+    if (teamMember.bingos['speed'] > 0) {
 	$bingosHTML.find('.bingo-status.speed').addClass('true');
     } else {
 	$bingosHTML.find('.bingo-status.speed').removeClass('true');
     }
-    if (teamMember.bingos['technical'] === '1') {
+    $bingosHTML.find('.bingo-status.speed').text('Speed Bingo x'+teamMember.bingos['speed'])
+    if (teamMember.bingos['technical'] > 0) {
 	$bingosHTML.find('.bingo-status.technical').addClass('true');
     } else {
 	$bingosHTML.find('.bingo-status.technical').removeClass('true');
     }
-    if (teamMember.bingos['any'] === '1') {
-	$bingosHTML.find('.bingo-status.any').addClass('true');
-    } else {
-	$bingosHTML.find('.bingo-status.any').removeClass('true');
-    }
-    if (teamMember.bingos['nelem'] === '1') {
+    $bingosHTML.find('.bingo-status.technical').text('Technical Bingo x'+teamMember.bingos['technical'])
+    if (teamMember.bingos['nelem'] > 0) {
 	$bingosHTML.find('.bingo-status.nelem').addClass('true');
     } else {
 	$bingosHTML.find('.bingo-status.nelem').removeClass('true');
     }
+    $bingosHTML.find('.bingo-status.nelem').text('Non-Elem Bingo x'+teamMember.bingos['nelem'])
 }
 
 /**
@@ -535,8 +541,8 @@ function updateStatsHTML(teamMember, $statsHTML) {
 	atk: parseInt(Monsties[teamMember.monstie].stats.atk),
 	def: parseInt(Monsties[teamMember.monstie].stats.def),
 	spd: parseInt(Monsties[teamMember.monstie].stats.spd),
-	crt: 0,
-	heal: 0,
+	crt: parseInt(Monsties[teamMember.monstie].stats.crt),
+	heal: parseInt(Monsties[teamMember.monstie].stats.heal),
 	// TODO: change eAttk to eAtk
 	dragonAtk: parseInt(Monsties[teamMember.monstie].eAttk.dragon),
 	fireAtk: parseInt(Monsties[teamMember.monstie].eAttk.fire),
@@ -550,34 +556,38 @@ function updateStatsHTML(teamMember, $statsHTML) {
 	waterRes: parseInt(Monsties[teamMember.monstie].eRes.water)
     }
 
-    // calculate stat modifiers from genes
-    for (var i = 0; i < 9; i++) {
-	baseStats['hp'] += parseInt(Genes[teamMember.genes[i]].statMods['hp']);
-	baseStats['atk'] += parseInt(Genes[teamMember.genes[i]].statMods['atk']);
-	baseStats['def'] += parseInt(Genes[teamMember.genes[i]].statMods['def']);
-	// TODO: change the crit key to crt
-	baseStats['crt'] += parseInt(Genes[teamMember.genes[i]].statMods['crit']);
-	baseStats['heal'] += parseInt(Genes[teamMember.genes[i]].statMods['heal']);
-	// TODO: change eAttk to eAtk
-	baseStats['dragonAtk'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['dragon']);
-	baseStats['fireAtk'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['fire']);
-	baseStats['iceAtk'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['ice']);
-	baseStats['thunderAtk'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['thunder']);
-	baseStats['waterAtk'] += parseInt(Genes[teamMember.genes[i]].eAttkMods['water']);
-	baseStats['dragonRes'] += parseInt(Genes[teamMember.genes[i]].eResMods['dragon']);
-	baseStats['fireRes'] += parseInt(Genes[teamMember.genes[i]].eResMods['fire']);
-	baseStats['iceRes'] += parseInt(Genes[teamMember.genes[i]].eResMods['ice']);
-	baseStats['thunderRes'] += parseInt(Genes[teamMember.genes[i]].eResMods['thunder']);
-	baseStats['waterRes'] += parseInt(Genes[teamMember.genes[i]].eResMods['water']);
-    }
-
     // calculate stat modifiers from bingos
-    if (teamMember.bingos['any'] === '1') {
-	baseStats['hp'] += 50;
+    if (teamMember.bingos['dragon'] > 0) {
+	baseStats['dragonAtk'] *= 1 + 0.1 * teamMember.bingos['dragon'];
+	baseStats['dragonAtk'] = Math.floor(baseStats['dragonAtk']);
+	$dragonAtk.addClass('modp');
     }
-    if (teamMember.bingos['nelem'] === '1') {
-	baseStats['spd']++;
-	$spd.addClass('modp');
+    if (teamMember.bingos['fire'] > 0) {
+	console.log(baseStats['fireAtk']);
+	baseStats['fireAtk'] *= 1 + 0.1 * teamMember.bingos['fire'];
+	baseStats['fireAtk'] = Math.floor(baseStats['fireAtk']);
+	console.log(baseStats['fireAtk']);
+	$fireAtk.addClass('modp');
+    }
+    if (teamMember.bingos['ice'] > 0) {
+	baseStats['iceAtk'] *= 1 + 0.1 * teamMember.bingos['ice'];
+	baseStats['iceAtk'] = Math.floor(baseStats['iceAtk']);
+	$iceAtk.addClass('modp');
+    }
+    if (teamMember.bingos['thunder'] > 0) {
+	baseStats['thunderAtk'] *= 1 + 0.1 * teamMember.bingos['thunder'];
+	baseStats['thunderAtk'] = Math.floor(baseStats['thunderAtk']);
+	$thunderAtk.addClass('modp');
+    }
+    if (teamMember.bingos['water'] > 0) {
+	baseStats['waterAtk'] *= 1 + 0.1 * teamMember.bingos['water'];
+	baseStats['waterAtk'] = Math.floor(baseStats['waterAtk']);
+	$waterAtk.addClass('modp');
+    }
+    if (teamMember.bingos['nelem'] > 0) {
+	baseStats['atk'] *= 1 + 0.1 * teamMember.bingos['nelem'];
+	baseStats['atk'] = Math.floor(baseStats['atk']);
+	$atk.addClass('modp');
     }
 
     // set the element text to be the correct stat
@@ -678,14 +688,14 @@ function updateStatsHTML(teamMember, $statsHTML) {
     } else if (baseStats['def'] < parseInt(Monsties[teamMember.monstie].stats.def)) {
 	$def.addClass('modn');
     }
-    if (baseStats['crt'] > 0) {
+    if (baseStats['crt'] > parseInt(Monsties[teamMember.monstie].stats.crt)) {
 	$crt.addClass('modp');
-    } else if (baseStats['crt'] < 0) {
+    } else if (baseStats['crt'] < parseInt(Monsties[teamMember.monstie].stats.crt)) {
 	$crt.addClass('modn');
     }
-    if (baseStats['heal'] > 0) {
+    if (baseStats['heal'] > parseInt(Monsties[teamMember.monstie].stats.heal)) {
 	$heal.addClass('modp');
-    } else if (baseStats['heal'] < 0) {
+    } else if (baseStats['heal'] < parseInt(Monsties[teamMember.monstie].stats.heal)) {
 	$heal.addClass('modn');
     }
     if (baseStats['dragonAtk'] > parseInt(Monsties[teamMember.monstie].eAttk.dragon)) {
@@ -860,7 +870,6 @@ function builderView(currentTargetClass) {
     buf += '<li><span class="builder bingo-status power">Power Bingo</span></li>';
     buf += '<li><span class="builder bingo-status speed">Speed Bingo</span></li>';
     buf += '<li><span class="builder bingo-status technical">Technical Bingo</span></li>';
-    buf += '<li><span class="builder bingo-status any">Anything Bingo</span></li>';
     buf += '<li><span class="builder bingo-status nelem">Non-Elem Bingo</span></li></ul></div></div>';
 
     // set the gene search table
@@ -967,7 +976,6 @@ function teamView() {
 	buf += '<li><span class="team bingo-status power">Power Bingo</span></li>';
 	buf += '<li><span class="team bingo-status speed">Speed Bingo</span></li>';
 	buf += '<li><span class="team bingo-status technical">Technical Bingo</span></li>';
-	buf += '<li><span class="team bingo-status any">Anything Bingo</span></li>';
 	buf += '<li><span class="team bingo-status nelem">Non-Elem Bingo</span></li></ul></div></div>';
 
 	// set the gene search table for the current monstie
@@ -1071,16 +1079,16 @@ $(document).ready(function () {
 		    'empty', 'empty', 'empty',
 		    'empty', 'empty', 'empty'],
 	    bingos: {
-		dragon: '0',
-		fire: '0',
-		ice: '0',
-		thunder: '0',
-		water: '0',
-		power: '0',
-		speed: '0',
-		technical: '0',
-		any: '0',
-		nelement: '0'
+		dragon: 0,
+		fire: 0,
+		ice: 0,
+		thunder: 0,
+		water: 0,
+		power: 0,
+		speed: 0,
+		technical: 0,
+		any: 0,
+		nelem: 0
 	    }
 	};
 
@@ -1227,16 +1235,16 @@ $(document).ready(function () {
 		    'empty', 'empty', 'empty',
 		    'empty', 'empty', 'empty'],
 	    bingos: {
-		dragon: '0',
-		fire: '0',
-		ice: '0',
-		thunder: '0',
-		water: '0',
-		power: '0',
-		speed: '0',
-		technical: '0',
-		any: '0',
-		nelement: '0'
+		dragon: 0,
+		fire: 0,
+		ice: 0,
+		thunder: 0,
+		water: 0,
+		power: 0,
+		speed: 0,
+		technical: 0,
+		any: 0,
+		nelem: 0
 	    }
 	});
     }
