@@ -302,9 +302,7 @@ function filterGenes(filter = true) {
     }
 
     // set the highlighted gene assuming one was found
-    // TODO: replace '+' with 'p' in keys
     if (counter > 0) {
-	console.log(highlightedKey)
 	var $highlightedGene = $('#gene-list').find('.'+highlightedKey);
 	$highlightedGene[0].scrollIntoView({
 	    block: 'nearest'
@@ -820,46 +818,46 @@ function addMonstie(e) {
  * @listens document#click
  */
 function addGene(e) {
-	const modifierRe = /((?:[^_\r\n]*))$/
     // get the key associated with the clicked gene
     var geneKey = buttonToKey($(e.currentTarget).attr('class'));
-	var teamMember = TeamBuilder.team[TeamBuilder.currentTeamIndex];
+    var teamMember = TeamBuilder.team[TeamBuilder.currentTeamIndex];
 
-	// ignore gene modifier
-	if (geneKey.endsWith('pp')) {
-		var baseGene = geneKey.substring(0, geneKey.length - 2);
-	} else if (geneKey.endsWith('p')) {
-		var baseGene = geneKey.substring(0, geneKey.length - 1);
-	} else {
-		var baseGene = geneKey
+    // ignore gene modifier
+    if (geneKey.endsWith('pp')) {
+	var baseGene = geneKey.substring(0, geneKey.length - 2);
+    } else if (geneKey.endsWith('p')) {
+	var baseGene = geneKey.substring(0, geneKey.length - 1);
+    } else {
+	var baseGene = geneKey
+    }
+
+    // check if team member already has this gene
+    var geneLoc = teamMember.genes.indexOf(gene => gene.includes(baseGene));
+    var slotIndex = parseInt(TeamBuilder.$currentBingoSlot.attr('class').split(' ')[2]);
+    if (geneLoc < 0 || geneLoc == slotIndex) {
+	// modify the team member currently being edited
+	teamMember.genes[slotIndex] = geneKey;
+	
+	// set the search text to what was chosen
+	TeamBuilder.$currentBingoSlot.val(Genes[geneKey].name);
+
+	// update the bingos of the team member and reset the HTML of achieved bingos
+	updateBingos(teamMember);
+	updateBingosHTML(teamMember, $('.bingo-list'));
+
+	// update the HTML for the monstie icon in case the element changed
+	updateMonstieHTML(teamMember, $('.monstie-icon.'+teamMember.monstie));
+
+	// update the HTML for the stats of the monstie
+	updateStatsHTML(teamMember, $('.stats-container'));
+
+	// set the currently active gene search slot to the next input field
+	if (slotIndex == 8) {
+	    slotIndex = 7;
 	}
-
-	// check if team member already has this gene
-	if (!teamMember.genes.find(gene => gene.includes(baseGene))) {
-		// modify the team member currently being edited
-		var slotIndex = parseInt(TeamBuilder.$currentBingoSlot.attr('class').split(' ')[2]);
-		teamMember.genes[slotIndex] = geneKey;
-		
-		// set the search text to what was chosen
-		TeamBuilder.$currentBingoSlot.val(Genes[geneKey].name);
-
-		// update the bingos of the team member and reset the HTML of achieved bingos
-		updateBingos(teamMember);
-		updateBingosHTML(teamMember, $('.bingo-list'));
-
-		// update the HTML for the monstie icon in case the element changed
-		updateMonstieHTML(teamMember, $('.monstie-icon.'+teamMember.monstie));
-
-		// update the HTML for the stats of the monstie
-		updateStatsHTML(teamMember, $('.stats-container'));
-
-		// set the currently active gene search slot to the next input field
-		if (slotIndex == 8) {
-		slotIndex = 7;
-		}
-		TeamBuilder.$currentBingoSlot = $('.gene-search.'+(slotIndex+1));
-		TeamBuilder.$currentBingoSlot.focus();
-	}
+	TeamBuilder.$currentBingoSlot = $('.gene-search.'+(slotIndex+1));
+	TeamBuilder.$currentBingoSlot.focus();
+    }
 }
 
 /**
