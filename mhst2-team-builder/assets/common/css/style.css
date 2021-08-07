@@ -913,3 +913,15 @@ footer {
     height: 100px;
     background-position: -919px -613px;
 }
+
+.monstie-icon.hellblade_glavenus {
+    width: 100px;
+    height: 100px;
+    background-position: -919px -715px;
+}
+
+.monstie-icon.boltreaver_astalos {
+    width: 100px;
+    height: 100px;
+    background-position: -919px -817px;
+}
